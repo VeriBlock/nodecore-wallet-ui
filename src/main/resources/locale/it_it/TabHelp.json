@@ -1,0 +1,13 @@
+{
+  "main.title": "Aiuto",
+  "label.WebOrg": "VeriBlock.org",
+  "label.Explorer": "Online Dashboard",
+  "label.Wiki": "VeriBlock Wiki",
+  "label.Telegram": "Telegram",
+  "label.Discord": "TT_Discord",
+  "lnkWebOrg.displayText": "Impara di piu\u0027 su veriblock e la nostra tecnologia",
+  "lnkExplorer.displayText": "Verifica le statistiche della rete, blocchi, transazioni e altro",
+  "lnkWiki.displayText": "Esplora la nostra documentazione",
+  "lnkTelegram.displayText": "Unisciti al nostro gruppo Telegram",
+  "lnkDiscord.displayText": "TT_Unisciti al nostro gruppo discord"
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="450.0" minWidth="700.0" prefHeight="614.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.pop.AutoMineController">
+   <children>
+      <VBox prefHeight="410.0" prefWidth="678.0">
+         <children>
+            <Label fx:id="lblMessage1" text="The PoP Miner can be set to automatically mine on every new block." />
+            <Label fx:id="lblMessage2" text="There are 4 types of rounds. This pattern repeats every 20 blocks. Round 4 is a 'keystone', which gives a higher reward." />
+            <Label text=" " />
+
+         <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imgRoundsBackground" fitHeight="45.0" fitWidth="796.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgRounds1" fitHeight="45.0" fitWidth="796.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgRounds2" fitHeight="45.0" fitWidth="796.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgRounds3" fitHeight="45.0" fitWidth="796.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgRounds4" fitHeight="45.0" fitWidth="796.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         </StackPane>
+
+            <Label text=" " />
+            <Hyperlink fx:id="hlnkHelp" onAction="#clickHelpRounds" text="Click here to see more about different rounds" />
+            <Label text=" " />
+            <Label fx:id="lblSelectRounds" text="Please select which ones you would like to mine:" />
+            <Label text=" " />
+            <CheckBox fx:id="chkRound1" mnemonicParsing="false" onAction="#clickRound1" text="Round 1" />
+            <CheckBox fx:id="chkRound2" mnemonicParsing="false" onAction="#clickRound2" text="Round 2" />
+            <CheckBox fx:id="chkRound3" mnemonicParsing="false" onAction="#clickRound3" text="Round 3" />
+            <CheckBox fx:id="chkRound4" mnemonicParsing="false" onAction="#clickRound4" text="Round 4 (Keystone)" />
+            <Label text=" " />
+            <Label fx:id="lblSummaryAmount" text="This will try to AutoMine X out of every 20 blocks" />
+            <Label fx:id="lblWarning" text="WARNING: This will continue to mine as long as the the PoP Service CLI is running... even if the GUI is shut down." />
+            <Label text=" " />
+
+            <HBox>
+               <children>
+                  <Button fx:id="btnApply" mnemonicParsing="false" onAction="#clickApplyAndClose" text="Apply" />
+                  <Label text=" " />
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#clickCancel" text="Cancel" />
+               </children>
+            </HBox>
+
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

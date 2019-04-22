@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.CheckBox?>
+
+<?import javafx.scene.text.TextFlow?>
+<AnchorPane prefHeight="450.0" prefWidth="700.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.wallet.TabMyAddressesController">
+
+    <children>
+        <BorderPane prefHeight="1000.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <VBox prefHeight="1000.0" prefWidth="700.0" spacing="10.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <BorderPane prefHeight="90.0" prefWidth="700.0">
+                            <left>
+                                <TextFlow layoutX="14.0" layoutY="65.0" prefHeight="26.0" >
+                                    <children>
+                                        <Label fx:id="lblTotalBalanceLabel"  styleClass="subHeaderLabel" text="Total Balance" />
+                                        <Label  styleClass="subHeaderLabel" text=":" />
+                                        <TextField fx:id="lblTotalBalance" prefWidth="669.0" styleClass="copyable-labelSubHeader" text="..." HBox.hgrow="ALWAYS" />
+                                    </children>
+                                </TextFlow>
+                            </left>
+                            <right>
+                                <Button id="o" fx:id="btnCreateNew" layoutX="23.0" layoutY="44.0" mnemonicParsing="false" onAction="#clickNewAddress" styleClass="outline-button" text="Create new Address" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </right>
+                        </BorderPane>
+                        <VBox>
+                            <children>
+                                <Label fx:id="Addresses" styleClass="subHeaderLabel" text="Addresses " />
+
+                                <BorderPane  prefHeight="36.0" maxHeight="36.0" minHeight="36.0" >
+                                    <left>
+                                        <CheckBox fx:id="chkHideZeroBalance" mnemonicParsing="false"  BorderPane.alignment="CENTER_LEFT"
+                                                  onAction="#clickHideZeroBalance"
+                                                  text="Hide addresses with zero balance" />
+                                    </left>
+                                    <right>
+                                        <Button  fx:id="btnExport" mnemonicParsing="false" BorderPane.alignment="TOP_RIGHT"
+                                                 onAction="#clickExport" styleClass="outline-button" text="Export"  />
+                                    </right>
+                                </BorderPane>
+
+                                <TableView fx:id="mainGrid" editable="true" prefHeight="8500" prefWidth="700.0">
+                                    <columns>
+                                        <TableColumn fx:id="colAddress" minWidth="200.0" prefWidth="200.0" text="Address" />
+                                        <TableColumn fx:id="colPending" prefWidth="163.0" styleClass="column-left" text="Pending" />
+                                        <TableColumn fx:id="colConfirmed" prefWidth="163.0" styleClass="column-left" text="Confirmed" />
+                                        <TableColumn fx:id="colDefault" minWidth="0.0" prefWidth="126.0" text="Default" />
+                                        <TableColumn fx:id="colNickName" minWidth="150.0" prefWidth="150.0" text="NickName" />
+                                    </columns>
+                                </TableView>
+                                <Label fx:id="lblRefreshTime" text="" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

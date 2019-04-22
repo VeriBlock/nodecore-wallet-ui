@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="panelRoot" minHeight="83.0" minWidth="800.0" prefHeight="83.0" prefWidth="1282.0" styleClass="footerDefault" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.shell.FooterController">
+   <children>
+      <TextFlow prefWidth="400.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Label fx:id="lblConnected_1" text="..." />
+            <Hyperlink fx:id="lblConnectedLink" onAction="#clickBlockLink" text="..." />
+            <Label fx:id="lblConnected2" text="..." />
+            <Label text=" " />
+            <Label fx:id="lblWalletLockIcon" text=""  onMouseClicked="#clickWalletLocked">
+               <tooltip>
+                  <Tooltip fx:id="lblWalletLockIconTooltip" text="Wallet is encrypted and locked" />
+               </tooltip>
+            </Label>
+         </children>
+      </TextFlow>
+      <Label fx:id="lblRow2Text" text="" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
+      <Hyperlink fx:id="lnkBalance" onAction="#clickMyBalance" text="..." AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0" />
+      <ProgressIndicator fx:id="progressSpinner" layoutX="840.0" layoutY="15.0" prefHeight="40.0" prefWidth="40.0" styleClass="footerProgressSpinner" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+   </children>
+</AnchorPane>

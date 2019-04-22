@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="600.0" minWidth="800.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.tools.TabTestController">
+   <children>
+      <VBox layoutX="54.0" layoutY="38.0" prefHeight="425.0" prefWidth="708.0">
+         <children>
+            <HBox>
+               <children>
+                  <Label text="Set Status" />
+                  <Button mnemonicParsing="false" onAction="#clickStatusSuccess" text="Success" />
+                  <Button mnemonicParsing="false" onAction="#clickStatusError" text="Error" />
+                  <Button mnemonicParsing="false" onAction="#clickStatusWarning" text="Warning" />
+                  <Button mnemonicParsing="false" onAction="#clickStatusInfo" text="Info" />
+                  <Button fx:id="btnClearStatus" mnemonicParsing="false" onAction="#clickStatusClear" text="Clear Status" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#clickAlert" text="Alert Popup" />
+            <TextField fx:id="lblCopy1" prefHeight="25.0" prefWidth="255.0" styleClass="copyable-label" text="Selectable Label and more detail here" />
+            <Label text="Label" />
+            <Label fx:id="lblResult" text="some label" />
+            <Button mnemonicParsing="false" onAction="#clickShowPopup" text="Show Modal Popup" />
+            <Button mnemonicParsing="false" onAction="#clickShowPrompt" text="Show Password Prompt" />
+            <Button mnemonicParsing="false" onAction="#saveProperties" text="Save Properties" />
+            <Button mnemonicParsing="false" onAction="#clickTestProcess" text="Check Processes" />
+            <Button mnemonicParsing="false" onAction="#clickTestLocale" text="Test Locale" />
+            <Button mnemonicParsing="false" onAction="#clickTestLocking" text="Test Lock Wallet" />
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickTestResource" text="Test Resource" />
+                  <TextField fx:id="txtResourceInput" prefHeight="25.0" minWidth="150" prefWidth="200.0"
+                             text="sounds/button6.wav" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#clickUnhandledException" text="Unhandled Exception" />
+            <Button mnemonicParsing="false" onAction="#clickSqlLite" text="DB Test" />
+              <HBox>
+                  <children>
+                    <Button mnemonicParsing="false" onAction="#clickSound" text="Sound Effect" />
+                      <TextField fx:id="txtSoundPath" prefHeight="25.0" minWidth="200" prefWidth="200.0"
+                                 text="" />
+                  </children>
+              </HBox>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickBackgroundProcessStart" text="Background - Start" />
+                  <Button mnemonicParsing="false" onAction="#clickBackgroundProcessStop" text="Background - Stop" />
+                  <TextField prefHeight="25.0" minWidth="200" prefWidth="200.0"
+                             text="UI did not hang" />
+               </children>
+            </HBox>
+
+
+            <HBox>
+               <children>
+                  <Label fx:id="lblOnChangeBlockHeight" text="..." />
+                  <Label  text=" | " />
+                  <Label fx:id="lblOnChangeBalance" text="..." />
+               </children>
+            </HBox>
+
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="450.0" minWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.pop.ConnectPoPController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <center>
+            <AnchorPane prefHeight="271.0" prefWidth="468.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="409.0" prefWidth="622.0">
+                     <children>
+                        <Label fx:id="lblMessage1" text="The PoP Service is a separate application that must run in order to PoP mine." />
+                        <Label fx:id="lblMessage2" text="Please start this process. It will run in a new window." />
+                        <Label fx:id="lblMessage3" text="Only 1 instance" />
+                        <Hyperlink fx:id="hlnkHelp" onAction="#click_HelpLink" text="View Help for PoP Service" />
+                        <Label text="" />
+                        <Label layoutX="10.0" layoutY="45.0" text="" />
+                        <HBox>
+                           <children>
+                              <Button fx:id="btnStartPoP" mnemonicParsing="false" onAction="#clickStartPoP" text="Start PoP Service" />
+                              <Label text=" " />
+                              <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#clickCancel" text="Close" />
+                              <Label text=" " />
+                              <Button fx:id="btnTestConnectivity" mnemonicParsing="false" onAction="#clickTest" text="Test PoP Connectivity" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="115.0" text="" />
+                        <Label fx:id="lblResult" text="..." />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

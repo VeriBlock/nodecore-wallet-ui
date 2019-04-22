@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="450.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.pop.AddBtcController">
+   <children>
+      <VBox prefHeight="410.0">
+         <children>
+            <Label fx:id="lblMsg1" text="PoP mining requires a small amount of BTC for the TX fee." />
+            <Label fx:id="lblMsg2" text="Please deposit minimal amounts of BTC sufficient for mining." />
+            <Label fx:id="lblMsg3" text="It may take 10-60 minutes for any BTC you transfer to show up here." />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0" maxWidth="200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="600.0" prefWidth="600.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lblMinRequiredLabel" text="Minimum required BTC:" />
+                  <Label fx:id="lblMinBtc" text="0.000" GridPane.columnIndex="1" />
+                  <Label fx:id="lblSendToAddress" text="Send BTC to this address:" GridPane.rowIndex="1" />
+
+                   <HBox  GridPane.columnIndex="1" GridPane.rowIndex="1">
+                       <children>
+                           <TextField fx:id="lblBtcAddress" text="11111" minWidth="250" />
+                           <Label text=" " />
+                           <Button fx:id="btnCopyBtcAddress" mnemonicParsing="false" onAction="#clickCopy" text="Copy" />
+                       </children>
+                   </HBox>
+
+                   <Label fx:id="lblBtcBalanceLabel" text="My PoP BTC Balance:" GridPane.rowIndex="3" />
+                  <Hyperlink fx:id="hlnkViewAddress"  text="View BTC Address in Explorer"  onAction="#clickViewBtcInExplorer"
+                             GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="lblBtcBalance" text="0.000" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#clickClose" text="Close" />
+             <Label text="" />
+             <Label fx:id="lblStatus" text="" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

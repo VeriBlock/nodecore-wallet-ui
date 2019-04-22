@@ -1,0 +1,48 @@
+{
+	"main.title": "TT_Transactions",
+	
+	"label.selectAddress" :"TT_Address",
+	"label.pageSize" :"TT_Page Size",
+	"label.headerPending" :"TT_Pending",
+	"label.headerConfirmed" :"TT_Confirmed",
+	"button.rebuildCache" :"TT_Rebuild Wallet Cache",
+	"button.refresh" :"TT_Refresh Page",
+	"button.refresh.tooltip" : "TT_This page refreshes automatically with each new block",
+	"pager.onlyNPages" : "TT_There are only %1$s page(s)",
+	"status.gotAllAddresses" : "TT_Got transactions for all addresses",
+	"status.gotSpecificAddress" : "TT_Got transactions for address %1$s",
+	"status.couldNotGet.cacheRebuilding" : "TT_Could not get wallet transactions, cache is still building, please try later. At block %1$s of %2$s (%3$s complete)",
+	"status.couldNotGet" : "TT_Could not get wallet transactions, CacheState=%1$s.",
+	"status.error.corrupt" : "TT_If this problem continues, then please resync NodeCore from scratch or the latest bootstrapping file.",
+	"status.error.technicalWrapper" : "TT_Technical Message: %1$s",
+
+	"apiMessage.noBestBlockFound" : "TT_No best block could be found at index, possible nodecore.dat corruption",
+
+	"refreshCache.warning" :"TT_This will rebuild all the cached transactions in your wallet cache. It will NOT change your balance nor send new transactions.\nThis is a troubleshooting action if your wallet transactions appear corrupt.\nIf your transactions are showing correctly, then you do not need to rebuild this.\nIt could take a long time to rebuild.\nDo you want to rebuild your wallet cache?",
+	"refreshCache.warning.proceed" : "TT_Wallet cache rebuilding. This will take some time, check back on this page later...",
+	"refreshCache.warning.cancel" : "TT_Action cancelled",
+	"grid.noResults" :  "TT_No results found",
+	"grid.cacheStillRebuilding" :  "TT_Wallet cache still rebuilding...",
+
+	"colTimeStamp" : "TT_TimeStamp",
+	"colBlockNum" : "TT_Block#",
+	"colConfirmations" : "TT_Confirmations",
+	"colTxType" : "TT_Tx Type",
+	"colAddressMine" : "TT_My Address",
+	"colAddressFrom" : "TT_Address From",
+	"colAddressTo" : "TT_Address To",
+	"colAmount" : "TT_Amount (%1$s)",
+	"colBalance" : "TT_Balance",
+	"colTxId" : "TT_TxId",
+	"colStatus" : "TT_Status",
+				  
+	"colTxTypePending" : "TT_Tx Type",
+	"colAddressMinePending" : "TT_My Address",
+	"colAddressFromPending" : "TT_Address From",
+	"colAddressToPending" : "TT_Address To",
+	"colAmountPending" : "TT_Amount (%1$s)",
+	"colTxIdPending" : "TT_TxId",
+	"colStatusPending" : "TT_Status",
+
+	"refreshLabel_update" : "TT_Updated"
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.wallet.TabSendController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane prefHeight="252.0" prefWidth="780.0">
+              <columnConstraints>
+                <ColumnConstraints maxWidth="130.0" minWidth="130.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="471.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="156.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lblSendToAddress" text="Send To Address" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtSendTo" prefWidth="400.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                   <Label fx:id="lblAmount" text="Amount" GridPane.rowIndex="2" />
+                   <HBox alignment="CENTER_LEFT" maxHeight="28.0" prefHeight="28.0" spacing="5.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="txtAmount" maxHeight="28.0" maxWidth="158.0" prefHeight="28.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="lblUnitsAmount" text="&lt;units&gt;" />
+                         <Button mnemonicParsing="false" onAction="#clickTest" text="Test" visible="false" />
+                     </children>
+                  </HBox>
+
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <children>
+                       <Button prefHeight="40.0" fx:id="btnSend" id="btnSendX" mnemonicParsing="false" onAction="#clickSend" text="Send"  />
+                       <Label text=" " />
+                       <Button prefHeight="40.0" fx:id="btnDrainAddress" mnemonicParsing="false" onAction="#clickDrain" text="Drain Address" />
+                    </children>
+                </HBox>
+
+
+                   <Label fx:id="lblFeePerByte" text="Fee per byte" GridPane.rowIndex="3">
+                     <tooltip>
+                        <Tooltip fx:id="lblFeePerByteToolTip" text="The fee paid (per byte) to veriblock miners. Higher fees incentivize miners to include your transaction in their blocks more quickly." />
+                     </tooltip></Label>
+                  <HBox alignment="CENTER_LEFT" maxHeight="28.0" prefHeight="28.0" spacing="5.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="txtFeePerByte" maxHeight="28.0" maxWidth="158.0" prefHeight="28.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="lblUnitsFee" text="&lt;units&gt;" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="lblSendFrom" prefHeight="35.0" prefWidth="222.0" text="Send from Address" />
+                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+                     <children>
+                        <ChoiceBox fx:id="ddAddressFrom" minWidth="500" prefHeight="51.0" prefWidth="500" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <ChoiceBox fx:id="ddFee" layoutX="287.0" layoutY="320.0" prefHeight="51.0" prefWidth="600.0" visible="false" />
+      <Label fx:id="lblValue" layoutX="306.0" layoutY="397.0" text="Label" visible="false" />
+   </children>
+</AnchorPane>

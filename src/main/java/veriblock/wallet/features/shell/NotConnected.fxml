@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="600.0" minWidth="800.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.shell.NotConnectedController">
+   <children>
+      <VBox layoutX="143.0" layoutY="188.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label fx:id="lblIncomingMessage" text="Label" visible="false" />
+            <Label text="&#10;" />
+            <Label fx:id="lblConnectToNC" text="Please first connect to NodeCore. This could be a local or remote instance." />
+             <Label fx:id="lblMinVersion" text="This requires at least NodeCore version XYZ or higher." />
+             <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="400.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="btnNodeCoreStart" mnemonicParsing="false" onAction="#clickStartNC" text="Start NodeCore" GridPane.columnIndex="1" />
+                  <Button fx:id="btnNodeCoreInstall" mnemonicParsing="false" onAction="#clickInstallNC" text="Install NodeCore" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                   <Button fx:id="btnNodeCoreReconnect" mnemonicParsing="false" onAction="#clickReconnectNC" text="Reconnect to NodeCore" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                  <Label  fx:id="lblbtnNodeCoreStart" text="I already have NodeCore on this machine and want to start it" GridPane.columnIndex="2" />
+                  <Label  fx:id="lblbtnNodeCoreInstall" text="I do not yet have NodeCore and want to open a webpage with install instructions" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label  fx:id="lblbtnNodeCoreReconnect" text="NodeCore is already running, I changed a connection property and want to try reconnecting" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Label text="&#10;" />
+            <Label fx:id="lblPropFile" prefWidth="742.0" text="Make sure the address, port, and (optional) password in the properties file are correct:" />
+            <Hyperlink fx:id="hlinkPropFile" onAction="#clickLink_propFile" text="PropFileHere" />
+            <Label text="&#10;" />
+            <Label fx:id="lblMessageCommunity" text="For further questions, join the community at:" />
+            <Hyperlink fx:id="lnkForum" onAction="#clickLink_forum" text="VeriBlock Discord" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

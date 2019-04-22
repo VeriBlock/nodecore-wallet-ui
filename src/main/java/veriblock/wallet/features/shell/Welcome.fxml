@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="600.0" minWidth="800.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.shell.WelcomeController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imgName" fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../resources/images/VeriBlock_Logo_Rev.png" />
+               </image>
+            </ImageView>
+            <Label styleClass="headerLabel"  />
+            <Label fx:id="lblHeader" styleClass="headerLabel" text="ZZ_Welcome to the VeriBlock GUI Wallet!" />
+            <Label fx:id="lblCustomMessage" text="..." />
+            <Label text="&#10;" />
+            <HBox>
+               <children>
+                  <Label fx:id="lblSelectLanguage" text="ZZ_Select your language" />
+                  <Label text=" " />
+                  <ChoiceBox fx:id="ddLanguageList" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <Label text="&#10;" />
+            <Button fx:id="btnGetStarted" mnemonicParsing="false" onAction="#clickGetStarted" text="ZZ_Get Started" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,41 @@
+{
+  "main.title": "TT_My Addresses",
+  "label.balance.text": "TT_Total Balance",
+  "button.createNew.text": "TT_Create new Address",
+  "createNewAddress.areYouSure": "TT_Do you want to create a new address?",
+  "createNewAddress.cancelled": "TT_Action cancelled - did not create new address",
+  //%1$s = new address
+  "createNewAddress.sucess": "TT_Created new address %1$s",
+  "column.nickName.header": "TT_NickName",
+  "column.address.header": "TT_Address",
+  //%1$s = unit, like tVBK
+  "column.amountPending.header": "TT_Pending (%1$s)",
+  "column.amountConfirmed.header": "TT_Confirmed (%1$s)",
+  "column.isDefault.header": "TT_Is Default?",
+  "column.isDefault.buttonCurrent": "TT_Yes - Currently Default",
+  "column.isDefault.buttonMakeDefault": "TT_Make Default",
+
+  "column.nickName.promptType": "TT_<enter a nickname>",
+
+  //%1$s = address
+  "updateDefaultAddress.areYouSure": "TT_Are you sure you want to switch %1$s to be your new default address?",
+  "updateDefaultAddress.cancelled": "TT_Action cancelled, did not switch default address.",
+  "updateDefaultAddress.success": "TT_Switched %1$s to be new default address.",
+
+  "status.usedCachedAddress" : "TT_Could not connect to NodeCore, showing cached values. This does not show recent changes!",
+  "status.nickname.updateSuccess" : "TT_Updated nickname for address %1$s to '%2$s'",
+
+  "refreshLabel_update" : "TT_Updated",
+
+  "backup_prompt1" : "TT_You've changed the wallet by adding new address %1$s.",
+
+  "checkbox_hideZero" : "TT_Hide addresses with zero balance",
+  "hideZero_addNew_warning" : "TT_Currently '%1$s' is enabled, so the new address would be hidden.\nThis will unhide all zero-balance addresses so the new address will show up."
+
+}
+
+
+
+
+
+

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.shell.MainController">
+   <children>
+      <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane layoutX="246.0" layoutY="192.0" prefHeight="500.0" prefWidth="800.0" styleClass="mainPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <left>
+                  <VBox fx:id="leftNav" prefHeight="200.0" prefWidth="200.0" spacing="3.0" styleClass="leftNav" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-padding: 30 0 10 0;">
+                           <children>
+                              <ImageView fx:id="imgLogo" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER">
+                           <children>
+                              <Label fx:id="lblLeftNavTop" text="wallet app" />
+                           </children>
+                        </HBox>
+                       
+                        <ToggleButton fx:id="btnSend" mnemonicParsing="false" onAction="#clickTab_Send" styleClass="menuButton" text="Send">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="leftMenu" />
+                           </toggleGroup>
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="btnTransactions" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickTab_Transactions" styleClass="menuButton" text="Transactions" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonTransaction" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic></ToggleButton>
+                        <ToggleButton fx:id="btnMyAddresses" mnemonicParsing="false" onAction="#clickTab_MyAddresses" styleClass="menuButton" text="My Addresses" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonAddress" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic></ToggleButton>
+
+                         <ToggleButton fx:id="btnPoP" mnemonicParsing="false" onAction="#clickTab_PoP" styleClass="menuButton" text="PoP Mine" toggleGroup="$leftMenu">
+                             <graphic>
+                                 <ImageView fx:id="imgButtonPoP" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 </ImageView>
+                             </graphic>
+                         </ToggleButton>
+
+                        <ToggleButton fx:id="btnSettings" mnemonicParsing="false" onAction="#clickTab_Settings" styleClass="menuButton" text="Settings" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonSettings" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="btnBackup" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#clickTab_Backup" styleClass="menuButton" text="Backup" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonBackup" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic></ToggleButton>
+                        <ToggleButton fx:id="btnHelp" mnemonicParsing="false" onAction="#clickTab_Help" styleClass="menuButton" text="Help" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonHelp" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic></ToggleButton>
+
+                        <ToggleButton fx:id="btnDiagnostics" mnemonicParsing="false" onAction="#clickTab_Diagnostics" styleClass="menuButton" text="Diagnostics" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonDiagnostics" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnAbout" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" onAction="#clickTab_About" styleClass="menuButton" text="About" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonAbout" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic></ToggleButton>
+                        <ToggleButton fx:id="btnConsole" mnemonicParsing="false" onAction="#clickTab_Console" styleClass="menuButton" text="Console" toggleGroup="$leftMenu">
+                           <graphic>
+                              <ImageView fx:id="imgButtonConsole" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+
+                        <Button fx:id="BtnTest2" mnemonicParsing="false" onAction="#clickTest2" text="Test!" />
+                     </children>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </left>
+               <bottom>
+                  <Pane fx:id="pnlFooter" prefHeight="45.0" prefWidth="800.0" styleClass="footer" BorderPane.alignment="CENTER" />
+               </bottom>
+               <center>
+                  <!--<VBox styleClass="mainPane">-->
+                     <!--<children>-->
+                        <AnchorPane fx:id="myAnchor" prefWidth="790.0" styleClass="mainPane">
+                           <children>
+                              <Label fx:id="lblTabTitle" layoutX="15.0" layoutY="15.0" styleClass="headerLabel" text="&lt;Tab Title&gt;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+                              <HBox fx:id="statusBox" layoutX="15.0" layoutY="45.0" prefHeight="51.0" prefWidth="767.0" spacing="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="18.0">
+                           <children>
+                             <Label fx:id="statusIcon">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin></Label>
+                              <TextArea id="statusMessage" fx:id="lblStatusMessage" editable="false" prefWidth="762.0" style="-fx-border-color: black;" text="" wrapText="true" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </TextArea>
+
+                           </children>
+                              </HBox>
+                              <Pane fx:id="cMain" layoutX="15.0" layoutY="98.0" prefHeight="450.0" prefWidth="770.0" styleClass="mainPane" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="98.0" />
+                           </children>
+                        </AnchorPane>
+                     <!--</children>-->
+                     <!--<BorderPane.margin>-->
+                        <!--<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />-->
+                     <!--</BorderPane.margin>-->
+                  <!--</VBox>-->
+               </center>
+            </BorderPane>
+            <AnchorPane fx:id="pnlModalBlocker" opacity="0.8" prefHeight="624.0" prefWidth="886.0" styleClass="modalBlocker" visible="false" />
+            <AnchorPane fx:id="pnlModalDialogue" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="modalPopup" translateX="50.0" visible="false" />
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,13 @@
+{
+  "main.title": "帮助",
+  "label.WebOrg": "VeriBlock官方网站",
+  "label.Explorer": "网络监控面板",
+  "label.Wiki": "VeriBlock百科",
+  "label.Telegram": "电报群",
+  "label.Discord": "Discord",
+  "lnkWebOrg.displayText": "更多了解VeriBlock和我们的技术",
+  "lnkExplorer.displayText": "查看网络状况，区块，转账记录及其他",
+  "lnkWiki.displayText": "查询我们的文档",
+  "lnkTelegram.displayText": "加入我们的电报群",
+  "lnkDiscord.displayText": "加入我们的Discord群聊"
+}

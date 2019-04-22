@@ -1,0 +1,22 @@
+{
+  "main.title": "TT_Help",
+  
+  "label.WebOrg" : "TT_VeriBlock.org",
+  "label.Explorer" : "TT_Online Dashboard",
+  "label.Wiki" : "TT_VeriBlock Wiki",
+  "label.Telegram" : "TT_Telegram",
+  "label.Discord" : "TT_Discord",
+
+  "lnkWebOrg.displayText" : "TT_Learn more about VeriBlock and our technology",
+   "lnkExplorer.displayText" : "TT_Check the network status, blocks, transactions and more",
+   "lnkWiki.displayText" : "TT_Explore our documentation",
+   "lnkTelegram.displayText" : "TT_Join our Telegram group chat",
+  "lnkDiscord.displayText" : "TT_Join our Discord group chat"
+}
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+{
+  "walletService_passwordCancelled": "未输入钱包密码。操作取消",
+  "walletService_enterPassword": "请输入密码解锁钱包。密码在第一次钱包加密时已设置。",
+  "walletService_enterPasswordEncrypt": "请输入密码给钱包加密。请记住密码以便日后登录钱包。",
+  "walletService_backupcancel": "未能备份钱包",
+  "walletService_backup_prompt": "打算备份新钱包吗？\n(强烈建议备份钱包)",
+  "walletService_backup_success": "备份钱包保存至 %1$s",
+  "walletService_backup_fail": "备份钱包时产生错误",
+  "walletService_couldNotUnlock": "无法解锁钱包，产生未知错误。",
+  "footer_lockwallet_shouldUnlocked": "钱包已加密，现已上锁。点击解锁。",
+  "footer_lockwallet_shouldLocked": "钱包已加密，现在已解锁。点击重新上锁。",
+  "footer_lockwallet_locked": "你确定你需要给钱包重新上锁？"
+}

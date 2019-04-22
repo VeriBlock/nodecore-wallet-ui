@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.Region?>
+<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.shell.TabHelpController">
+   <children>
+      <BorderPane layoutX="339.0" layoutY="184.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefWidth="479.0" styleClass="outline-hBox" alignment="CENTER_LEFT">
+                     <children>
+                        <ImageView fx:id="imgHome" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"  BorderPane.alignment="CENTER_LEFT">
+                           <image>
+                              <Image url="@../../../../resources/images/help/home.png" />
+                           </image>
+                        </ImageView>
+                        <Region minWidth="30" maxWidth="30" />
+                        <VBox minHeight="48.0" alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="lblWebOrg"  text="veriblock.org" />
+                              <Hyperlink fx:id="lnkWebOrg" onAction="#clickOrg" text="Learn more about veriblock and our technology" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+
+                  <HBox prefWidth="479.0" styleClass="outline-hBox" alignment="CENTER_LEFT">
+                     <children>
+                        <ImageView fx:id="imgDashboard" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"  BorderPane.alignment="CENTER_LEFT">
+                           <image>
+                              <Image url="@../../../../resources/images/help/dashboard.png" />
+                           </image>
+                        </ImageView>
+                        <Region minWidth="30" maxWidth="30" />
+                        <VBox minHeight="48.0" alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="lblExplorer" text="Online Dashboard" />
+                              <Hyperlink fx:id="lnkExplorer" onAction="#clickExplorer" text="Check the network status, blocks, transactions and more" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+
+                  <HBox prefWidth="479.0" styleClass="outline-hBox" alignment="CENTER_LEFT">
+                     <children>
+                        <ImageView fx:id="imgWiki" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"  BorderPane.alignment="CENTER_LEFT">
+                           <image>
+                              <Image url="@../../../../resources/images/help/wiki.png" />
+                           </image>
+                        </ImageView>
+                        <Region minWidth="30" maxWidth="30" />
+                        <VBox minHeight="48.0" alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="lblWiki" text="veriblock Wiki" />
+                              <Hyperlink fx:id="lnkWiki" onAction="#clickWiki" text="Explore our documentation" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+
+                  <HBox prefWidth="479.0" styleClass="outline-hBox" alignment="CENTER_LEFT">
+                     <children>
+                        <ImageView fx:id="imgTelegram" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"  BorderPane.alignment="CENTER_LEFT">
+                           <image>
+                              <Image url="@../../../../resources/images/help/telegram.png" />
+                           </image>
+                        </ImageView>
+                        <Region minWidth="30" maxWidth="30" />
+                        <VBox minHeight="48.0" alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="lblTelegram" text="ZZ_Discord" />
+                              <Hyperlink fx:id="lnkTelegram" onAction="#clickTelegram" text="ZZ_Join our Discord group chat" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

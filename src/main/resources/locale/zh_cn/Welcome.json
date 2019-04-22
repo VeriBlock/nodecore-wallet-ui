@@ -1,0 +1,6 @@
+{
+  "main.title": "欢迎使用VeriBlock图形用户界面钱包！",
+  "text.main": "运行本钱包需要连接正在运行的本地核心节点\n\n如果没有运行核心节点，请运行核心节点以便钱包正常连接。\n\n将会自动连接到：%1$s:%2$s (网络类型\u003d%3$s) 指定的属性文件(nodecore_wallet_ui.properties)\n\n",
+  "button.getstarted": "开始连接",
+  "label.selectLanguage": "选择显示语言"
+}

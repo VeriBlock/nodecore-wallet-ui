@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="450.0" minWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.pop.OperationDetailController">
+   <children>
+      <VBox prefHeight="410.0" prefWidth="678.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="678">
+               <children>
+                  <Pane fx:id="workflow1" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                     <children>
+                        <Label fx:id="lblWrkflow1" styleClass="workflow-text" text="Ready" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="workflow2" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                     <children>
+                        <Label fx:id="lblWrkflow2" styleClass="workflow-text" text="Publish" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="workflow3" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                     <children>
+                        <Label fx:id="lblWrkflow3" styleClass="workflow-text" text="Transact" />
+                     </children>
+                  </Pane>
+                   <Pane fx:id="workflow4" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                       <children>
+                           <Label fx:id="lblWrkflow4" styleClass="workflow-text" text="Wait" />
+                       </children>
+                   </Pane>
+                   <Pane fx:id="workflow5" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                       <children>
+                           <Label fx:id="lblWrkflow5" styleClass="workflow-text" text="Proof" />
+                       </children>
+                   </Pane>
+                   <Pane fx:id="workflow6" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                       <children>
+                           <Label fx:id="lblWrkflow6" styleClass="workflow-text" text="Context" />
+                       </children>
+                   </Pane>
+                   <Pane fx:id="workflow7" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                       <children>
+                           <Label fx:id="lblWrkflow7" styleClass="workflow-text" text="Submit" />
+                       </children>
+                   </Pane>
+                   <Pane fx:id="workflow8" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                       <children>
+                           <Label fx:id="lblWrkflow8" styleClass="workflow-text" text="Confirm" />
+                       </children>
+                   </Pane>
+                   <Pane fx:id="workflow9" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                       <children>
+                           <Label fx:id="lblWrkflow9" styleClass="workflow-text" text="Done!" />
+                       </children>
+                   </Pane>
+               </children>
+            </HBox>
+             <Label fx:id="lblCurrentAction" text="Some text here per the current action" />
+             <Label text=" " />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="300.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lblFieldOpId" text="Operation Id" />
+                  <TextField fx:id="lblOpId" text="op value" GridPane.columnIndex="1" />
+                  <Label fx:id="lblFieldVbkTxId" text="VBK Tx Id" GridPane.rowIndex="2" />
+                  <Label fx:id="lblFieldBtcTxId" text="Bitcoin Tx Id" GridPane.rowIndex="1" />
+                  <Hyperlink fx:id="hlnkVbkTxId" onAction="#clickVbkTxId" text="Hyperlink" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Hyperlink fx:id="hlnkBtcTxId" onAction="#clickBtcTxId" text="Hyperlink" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblFieldMinerAddress" text="VBK Miner Address" GridPane.rowIndex="4" />
+                  <Label fx:id="lblFieldOpReturnData" text="Bitcoin OP_RETURN Data" GridPane.rowIndex="5" />
+                  <TextField fx:id="lblVbkAddress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextArea fx:id="lblOpReturnData" minHeight="100" minWidth="250" prefHeight="100.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="lblFieldMessage" text="Message" GridPane.rowIndex="3" />
+                  <Label fx:id="lblMessage" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#clickClose" text="Close" />
+
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

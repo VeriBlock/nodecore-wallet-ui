@@ -1,0 +1,29 @@
+{
+	"main.title": "TT_Send",
+	"label.sendFrom": "TT_Send From Address",
+	"label.feePerByte": "TT_Fee per Byte",
+	"label.feePerByte.toolTip": "TT_The fee paid (per byte) to veriblock miners. Higher fees incentivize miners to include your transaction in their blocks more quickly.",
+	"label.sendToAddress": "TT_Send To Address",
+	"label.amount": "TT_Amount",
+	"button.send.text": "TT_Send",
+	"button_drain_text": "TT_Drain Address",
+	"drain_warning" : "TT_This will drain all coins from %1$s to %2$s using the fee per byte of %3$s.\nThe resulting balance for %1$s will be 0.00000000 %4$s.\nDo you want to continue?",
+	"dropdown.fromAddress.leySystemChoose": "TT_Let System Choose...",
+	"send.validation.feeTooLow": "TT_Transaction fee is too low, it should be more than %1$s",
+	"send.validation.ammountPositive": "TT_Amount must be positive",
+	"send.validation.addressValid": "TT_Must enter valid address",
+	"send.validation.cancel": "TT_Did not send",
+	"send.validation.areYouSure2": "TT_Are you sure you want to send %1$s %2$s to this address? It cannot be undone.",
+	"send.validation.sentButNoId": "TT_Sent amount %1$s to address %2$s... Send command did not return transaction Id",
+	"send.validation.successSummary": "TT_Sent %1$s %6$s to address %2$s. Transaction(s): %4$s",
+	"send.validation.successDetail1": "TT_Sent coins!",
+	"send.validation.successDetail2": "TT_Sent from Address: %8$s\nSent to Address: %2$s\n\nSource Amount: %7$s %6$s\nFees: %5$s %6$s = (%9$s bytes x %10$s %6$s per byte)\nSent Amount: %1$s %6$s\n\n%3$s transaction(s):\n%4$s",
+	"general.badPassword" : "TT_(Ensure passphrase is correct)",
+	"send.validation.errorSending": "TT_There was an error and nothing was sent:",
+	"send.validation.belowWarning": "TT_FeePerByte is below the warning threshold %1$s, do you want to continue?",
+	"send.validation.aboveWarning": "TT_FeePerByte is above the warning threshold %1$s, do you want to continue?",
+	"send.validation.aboveWarning2": "TT_FeePerByte is %1$s, which above the warning threshold of %2$s.\nDo you want to continue?",
+	"send.validation.aboveVeryWarning": "TT_FeePerByte is VERY high! FeePerByte is %1$s, which is about %3$sx the warning threshold of %2$s!!\nThis means you are probably paying more for fees than you need to.\nDo you want to continue?"
+}
+
+

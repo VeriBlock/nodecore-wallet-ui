@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
+<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.wallet.TabBackupController">
+   <children>
+      <Accordion fx:id="accordionMain" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <panes>
+          <TitledPane fx:id="paneBackupWallet" animated="false" text="Backup your wallet">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="372.0" layoutY="49.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="backupText1" text="Select a folder where your wallet backup files will be saved" />
+                              <Label fx:id="backupText2" text="Note: the backed-up wallet file is saved on the computer where NodeCore is running." />
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="backupBtnChooseFolder" mnemonicParsing="false" onAction="#clickChooseDirectory" text="Choose Folder" />
+                                    <Label text=" " />
+                                    <TextField fx:id="txtWalletBackupFolder" prefWidth="517.0" promptText="zz_No folder selected" />
+                                 </children>
+                              </HBox>
+                              <Button fx:id="backupBtnDoBackup" mnemonicParsing="false" onAction="#clickDoBackup" styleClass="outline-button" text="Do Backup" />
+                              <Label text="" />
+                              <Label fx:id="labelOR" text="OR" />
+                              <Label text="" />
+                              <HBox>
+                                    <children>
+                                      <Label fx:id="backupSingleLabel" text="Backup a single address" />
+                                      <Label text=" " />
+                                      <ChoiceBox fx:id="ddAddressBackup" prefHeight="30.0" prefWidth="500" minWidth="500" HBox.hgrow="ALWAYS" />
+                                    </children>
+                              </HBox>
+                              <Button fx:id="backupBtnSingleAddress" mnemonicParsing="false" onAction="#clickDoBackupSingle" styleClass="outline-button" text="Do Backup" />
+
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="paneImportWallet" animated="false" text="Import a wallet">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="430.0" layoutY="119.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="importText1" text="Select a 'wallet_backup.dat' file to import" />
+                              <Label fx:id="importText2" text="Note that importwallet merges the addresses into the existing wallet, it does NOT overwrite them." />
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="importBtnChooseFile" mnemonicParsing="false" onAction="#clickChooseImportFile" text="Select backup file" />
+                                    <TextField fx:id="txtWalletImportFile" prefWidth="511.0" promptText="No file selected" />
+                                 </children>
+                              </HBox>
+                              <Button fx:id="importBtnDoImport" mnemonicParsing="false" onAction="#clickDoImport" text="Import Wallet" />
+
+
+                               <Label text="" />
+                               <Label fx:id="labelOR2" text="OR" />
+                               <Label text="" />
+                               <Label fx:id="importSingleLabel" text="Import a single address" />
+                               <TextArea fx:id="importTxtKey" prefHeight="50" prefWidth="400" wrapText="true" styleClass="textareaInput" />
+                               <Button fx:id="importBtnSingleAddress" mnemonicParsing="false" onAction="#clickDoImportSingle" styleClass="outline-button" text="Import Address" />
+
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+</AnchorPane>

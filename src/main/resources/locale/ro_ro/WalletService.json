@@ -1,0 +1,13 @@
+{
+  "walletService_passwordCancelled": "Passphrase-ul portofelului nu sa introdus. Acțiune întreruptă.",
+  "walletService_enterPassword": "Introdu passphrase-ul pentru a debloca portofelul. Acesta a fost setată cand sa criptat portofelul prima dată.",
+  "walletService_enterPasswordEncrypt": "Indrodu passphrase-ul pentru a cripta portofelul. Va trebui sa nu UIȚI parola pentru a putea accesa proftofelul!",
+  "walletService_backupcancel": "Nu sa făcut backup",
+  "walletService_backup_prompt": "Vrei sa faci backup la noul portofel?\n(Este recomandat să faci backup!)",
+  "walletService_backup_success": "Backup-ul a fost salvat la %1$s",
+  "walletService_backup_fail": "A apărut o eroare când sa facut backup",
+  "walletService_couldNotUnlock": "Nu sa putut debloca portofelul, eroare necunoscută",
+  "footer_lockwallet_shouldUnlocked": "Portofelul este criptat și blocat. Clic pentru deblocare.",
+  "footer_lockwallet_shouldLocked": "Portofelul este criptat și deblocat. Clic pentru blocare.",
+  "footer_lockwallet_locked": "Ești sigur ca vrei să blochezi portofelul?"
+}

@@ -1,0 +1,13 @@
+{
+  "main.title": "Ajutor",
+  "label.WebOrg": "VeriBlock.org",
+  "label.Explorer": "Online Dashboard",
+  "label.Wiki": "VeriBlock Wiki",
+  "label.Telegram": "Telegram",
+  "label.Discord": "Discord",
+  "lnkWebOrg.displayText": "Invață mai multe despre VeriBlock și despre tehonologia noastră",
+  "lnkExplorer.displayText": "Verifică statistica rețelei, blocurile, tranzacțiile și altele",
+  "lnkWiki.displayText": "Explorează documentația noastră",
+  "lnkTelegram.displayText": "Alătura-te grupului de Telegram",
+  "lnkDiscord.displayText": "Alătura-te grupului de Discord"
+}

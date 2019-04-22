@@ -1,0 +1,6 @@
+{
+  "main.title": "TT_Welcome to the VeriBlock GUI Wallet!",
+  "text.main": "TT_This needs to connect to a running instance of NodeCore\n\nIf NodeCore is not running, then please run it now so the wallet can connect to it.\n\nIt will try to autoconnect to the %1$s:%2$s (network=%3$s) specified in the properties file (nodecore_wallet_ui.properties)\n\n",
+  "button.getstarted": "TT_Get Started",
+  "label.selectLanguage": "TT_Change your language"
+}

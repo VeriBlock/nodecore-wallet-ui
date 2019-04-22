@@ -1,0 +1,13 @@
+{
+  "main.title": "मदद",
+  "label.WebOrg": "VeriBlock.org",
+  "label.Explorer": "ऑनलाइन डैशबोर्ड",
+  "label.Wiki": "वेरीब्लॉक विकी",
+  "label.Telegram": "टेलीग्राम",
+  "label.Discord": "TT_Discord",
+  "lnkWebOrg.displayText": "वेरीब्लॉक और हमारी तकनीक के बारे में और जानें",
+  "lnkExplorer.displayText": "नेटवर्क की स्थिति, ब्लॉक, लेनदेन और अधिक जांचें",
+  "lnkWiki.displayText": "हमारे दस्तावेज का अन्वेषण करें",
+  "lnkTelegram.displayText": "हमारे टेलीग्राम समूह चैट में शामिल हों",
+  "lnkDiscord.displayText": "TT_Join our Discord group chat"
+}

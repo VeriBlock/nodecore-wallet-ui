@@ -1,0 +1,13 @@
+{
+  "main.title": "Help",
+  "label.WebOrg": "VeriBlock.org",
+  "label.Explorer": "Online Dashboard",
+  "label.Wiki": "VeriBlock Wiki",
+  "label.Telegram": "Telegram",
+  "label.Discord": "Discord",
+  "lnkWebOrg.displayText": "Learn more about VeriBlock and our technology",
+  "lnkExplorer.displayText": "Check the network status, blocks, transactions and more",
+  "lnkWiki.displayText": "Explore our documentation",
+  "lnkTelegram.displayText": "Join our Telegram group chat",
+  "lnkDiscord.displayText": "Join our Discord group chat"
+}

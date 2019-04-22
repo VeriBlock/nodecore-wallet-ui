@@ -1,0 +1,6 @@
+{
+  "main.title": "Benvenuto al VeriBlock GUI wallet!",
+  "text.main": "C\u0027e bisogno di una connessione al NodeCore\n\nSe il NodeCore non e\u0027 stato avviato, per favore avvialo ora in modo che il tuo portafoglio si possa connettere a esso.\n\nCerchera\u0027 di autoconnettersi al %1$s:%2$s (network\u003d%3$s) specificato nel file properties (nodecore_wallet_ui.properties)\n\n",
+  "button.getstarted": "Inizia",
+  "label.selectLanguage": "Cambia la tua lingua"
+}

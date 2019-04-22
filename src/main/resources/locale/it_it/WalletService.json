@@ -1,0 +1,13 @@
+{
+  "walletService_passwordCancelled": "TT_Passphrase del portafoglio non inserita.Azione cancellata.",
+  "walletService_enterPassword": "TT_Inserici passphrase per sbloccare l'wallet. Questa e' stata inserita quando e' stato crittografato il portafoglio.",
+  "walletService_enterPasswordEncrypt": "TT_Inserisci passphrase per crittografare il portafoglio. Dovrai ricordare questa password per accedere al portafoglio in futuro!",
+  "walletService_backupcancel": "TT_Non ho eseguito il backup del portafoglio",
+  "walletService_backup_prompt": "TT_Vuoi fare il backup del nuovo portafoglio?\n(E' consigliato fare il backup)",
+  "walletService_backup_success": "TT_Backup del portafoglio salvato a %1$s",
+  "walletService_backup_fail": "TT_C'e stato un errore nel tentativo di backup del portafoglio",
+  "walletService_couldNotUnlock": "TT_Non e' stato possibile sbloccare il portafoglio, errore sconsciuto",
+  "footer_lockwallet_shouldUnlocked": "TT_Il portafoglio è crittografato e attualmente bloccato. Clicca per sbloccare.",
+  "footer_lockwallet_shouldLocked": "TT_Il portafoglio è crittografato e attualmente sbloccato. Clicca per ri-bloccare.",
+  "footer_lockwallet_locked": "TT_Sei sicuro di voler bloccare nuovamente il portafoglio?"
+}

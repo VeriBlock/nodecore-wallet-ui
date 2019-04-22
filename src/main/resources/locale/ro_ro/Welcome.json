@@ -1,0 +1,6 @@
+{
+  "main.title": "Bine ai Venit la VeriBlock GUI Wallet!",
+  "text.main": "Acesta trebuie să se conecteze la o instanta de NodeCore\n\nPentru a se putea conecta NodeCore trebuie să ruleze.\n\nVa incerca sa se autoconecteze %1$s:%2$s (network\u003d%3$s) cum este precizat in fișierul proprietăți (nodecore_wallet_ui.properties)\n\n",
+  "button.getstarted": "Începe",
+  "label.selectLanguage": "Schimbă limba"
+}

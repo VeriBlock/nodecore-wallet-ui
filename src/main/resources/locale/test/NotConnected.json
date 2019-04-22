@@ -1,0 +1,36 @@
+{
+  "main.title": "TT_Please connect to NodeCore",
+  /*"message.text.1" : "TT_Please first connect to NodeCore.\nYou can download NodeCore from Github:",*/
+  /*"message.text.2" : "TT_Then run NodeCore, and connect",*/
+  /*"message.text.3" : "TT_You can change the IP and Port in the properties file.\nFor further questions, join the community at:",*/
+  /*"message.forumlink.display.3": "TT_VeriBlock Telegram", */
+
+  "message.text.1a": "TT_Please first connect to NodeCore.",
+  "message.text.3a": "TT_You can change the IP and Port in the properties file.",
+  "message.forumlink.display.4": "TT_VeriBlock Discord",
+
+  "label.lblConnectToNC": "TT_Please first connect to NodeCore. This could be a local or remote instance.",
+  "label.lblPropFile": "TT_Make sure the address, port, and (optional) password in the properties file are correct:",
+  "label.lblMessageCommunity": "TT_For further questions, join the community at:",
+  "label.lnkForum": "TT_VeriBlock Discord",
+  "label.lblbtnNodeCoreStart": "TT_I already have NodeCore on this machine and want to start it",
+  "label.lblbtnNodeCoreInstall": "TT_I do not yet have NodeCore and want to open a webpage with install instructions",
+  "label.lblbtnNodeCoreReconnect": "TT_NodeCore is already running, I changed a connection property and want to try reconnecting",
+  "label.minNCVersion" : "TT_This requires at least NodeCore version %1$s or higher.",
+  "btnNodeCoreStart.text": "TT_Start NodeCore",
+  "btnNodeCoreInstall.text": "TT_Install NodeCore",
+  "btnNodeCoreReconnect.text": "TT_Reconnect to NodeCore",
+
+  "onloadErrorPassword": "TT_Missing or Invalid Password. Please modify the properties file (%1$s) and add a new key for the password to match what is in the nodecore.properties file: %2$s, and click the 'Reconnect to NodeCore' button.",
+  "onloadErrorUnavailable": "TT_NodeCore not available at %1$s. Please either start NodeCore or modify the properties file (%2$s) and click the 'Reconnect to NodeCore' button.",
+
+  "tryConnectSuccess": "TT_Connected to NodeCore!",
+  "tryConnectRetry": "TT_Attempt to reconnect",
+  "startAreYouSure": "TT_Are you sure that you want to start a new instance of NodeCore (there should be only one instance running).\nIf NodeCore is already started then don't start a second instance.",
+  "startAreYouSure_cancel": "TT_Action cancelled - new instance of NodeCore not started",
+
+  "startPickFolder": "TT_Pick the 'bin' folder containing NodeCore startup scripts (like nodecore or nodecore.bat)",
+  "startNoFolder": "TT_No folder selected, did not start NodeCore",
+  "startSuccess": "TT_Successfully started NodeCore as a new process. Running from: %1$s.\nPlease note that NodeCore may take several minutes to load before you can connect to it!",
+  "installSuccess": "TT_Opened webpage with install steps: %1$s"
+}

@@ -1,0 +1,6 @@
+{
+  "main.title": "TT_About",
+  "label.version": "TT_Version: %1$s",
+  "label.dateCompiled": "TT_Date Compiled: %1$s",
+  "label.appName": "TT_VeriBlock Desktop Client"
+}

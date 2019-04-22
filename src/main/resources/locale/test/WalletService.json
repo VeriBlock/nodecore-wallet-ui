@@ -1,0 +1,16 @@
+{
+	"walletService_passwordCancelled": "TT_Wallet passphrase not entered. Action cancelled.",
+	"walletService_enterPassword": "TT_Please enter passphrase to unlock wallet. This was set when first encrypting the wallet.",
+	"walletService_enterPasswordEncrypt": "TT_Please enter passphrase to encrypt the wallet. You will need to remember this password to access the wallet in the future!",
+	"walletService_backupcancel" : "TT_Did not backup the wallet",
+	"walletService_backup_prompt" : "TT_Do you want to back up the new wallet?\n(It is highly recommended to backup your wallet)",
+	"walletService_backup_success" : "TT_Backup for wallet saved to %1$s",
+	"walletService_backup_fail" : "TT_There was an error attempting to backup the wallet",
+	"walletService_couldNotUnlock" : "TT_Could not unlock wallet, unknown error occured",
+	"footer_lockwallet_shouldUnlocked" : "TT_Wallet is encrypted and currently locked. Click to unlock.",
+	"footer_lockwallet_shouldLocked" : "TT_Wallet is encrypted and currently unlocked. Click to re-lock.",
+	"footer_lockwallet_locked" : "TT_Are you sure you want to re-lock the wallet?"
+
+}
+
+
