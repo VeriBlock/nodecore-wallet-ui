@@ -144,8 +144,8 @@ public class ConnectPoPController extends DialogController {
 
         String successFile = ExternalProgramUtilities.startupExternalProcess(
                 result, popContainingFolder,
-                "nodecore-pop-0",
-                "nodecore-pop",
+                "veriblock-pop-miner",
+                "veriblock-pop-miner",
                 "NodeCore PoP Miner",
                 "-skipAck");
 
