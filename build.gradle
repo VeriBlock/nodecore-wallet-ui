@@ -55,14 +55,6 @@ dependencies {
 	compile 'com.google.protobuf:protobuf-java:3.5.1'
 	compile 'com.google.api.grpc:proto-google-common-protos:1.0.0'
 
-	// JavaFX
-	/*compile 'org.openjfx:javafx-controls:11.0.2'
-	compile 'org.openjfx:javafx-fxml:11.0.2'
-	compile 'org.openjfx:javafx-graphics:11.0.2'
-	compile 'org.openjfx:javafx-media:11.0.2'
-	compile 'org.openjfx:javafx-base:11.0.2'
-	*/
-
 	//Keep it simple, just pull all jar files from /lib folder
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 }
@@ -99,6 +91,7 @@ javafx {
 
 	version = '12'
 	modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', "javafx.base" ]
+	configuration = 'compileOnly'
 }
 
 jar {
