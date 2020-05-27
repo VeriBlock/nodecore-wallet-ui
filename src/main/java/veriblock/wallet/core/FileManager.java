@@ -9,7 +9,6 @@ package veriblock.wallet.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import veriblock.wallet.Main;
 
 import java.nio.file.Paths;
 

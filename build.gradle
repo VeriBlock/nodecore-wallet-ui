@@ -101,7 +101,6 @@ javafx {
 	modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', "javafx.base" ]
 }
 
-
 jar {
 	manifest {
 		attributes 'Name': 'veriblock/wallet',
