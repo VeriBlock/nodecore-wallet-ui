@@ -7,12 +7,12 @@
 
 package veriblock.wallet;
 
+import javafx.fxml.FXMLLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import veriblock.wallet.core.FileManager;
 import veriblock.wallet.core.Utils;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

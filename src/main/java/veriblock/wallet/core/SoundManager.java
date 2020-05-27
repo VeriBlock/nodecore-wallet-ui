@@ -8,8 +8,6 @@
 package veriblock.wallet.core;
 
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import veriblock.wallet.core.storage.UserSettings;

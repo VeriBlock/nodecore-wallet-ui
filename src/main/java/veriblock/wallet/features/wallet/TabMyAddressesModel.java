@@ -7,11 +7,6 @@
 
 package veriblock.wallet.features.wallet;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
-import veriblock.wallet.entities.AddressBalanceEntity;
-
 import java.util.*;
 
 public class TabMyAddressesModel {

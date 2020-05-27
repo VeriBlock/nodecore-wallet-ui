@@ -1,7 +1,4 @@
 buildscript {
-    dependencies {
-        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
-    }
     repositories {
         mavenLocal()
         mavenCentral()
@@ -12,6 +9,7 @@ plugins {
     id 'java'
     id 'application'
 	id 'nebula.release' version '6.0.0'
+	id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 // Define the main class for the application
@@ -27,27 +25,46 @@ repositories {
 	}
 }
 
-apply plugin: 'javafx-gradle-plugin'
-
 dependencies {
 	testImplementation 'junit:junit:4.12'
 
     runtime "org.codehaus.groovy:groovy:2.4.12"
 
+	// Logging
 	compile 'ch.qos.logback:logback-classic:1.2.3'
+
+	// Utils
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
 	compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
 	compile 'io.netty:netty-tcnative-boringssl-static:2.0.7.Final'
-    compile group: 'io.grpc', name: 'grpc-netty-shaded', version: '1.14.0'
+	compile 'de.jensd:fontawesomefx:8.9'
+
+	// Database
 	compile group: 'com.j256.ormlite', name: 'ormlite-core', version: '5.1'
 	compile group: 'com.j256.ormlite', name: 'ormlite-jdbc', version: '5.1'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
-	compile 'org.controlsfx:controlsfx:8.20.9'
+
+	// GRPC
+	compile 'io.grpc:grpc-api:1.29.0'
+	compile 'io.grpc:grpc-protobuf:1.29.0'
+	compile 'io.grpc:grpc-protobuf-lite:1.29.0'
+	compile 'io.grpc:grpc-stub:1.29.0'
+	compile 'io.grpc:grpc-netty-shaded:1.29.0'
+	compile 'com.google.protobuf:protobuf-java:3.5.1'
+	compile 'com.google.api.grpc:proto-google-common-protos:1.0.0'
+
+	// JavaFX
+	/*compile 'org.openjfx:javafx-controls:11.0.2'
+	compile 'org.openjfx:javafx-fxml:11.0.2'
+	compile 'org.openjfx:javafx-graphics:11.0.2'
+	compile 'org.openjfx:javafx-media:11.0.2'
+	compile 'org.openjfx:javafx-base:11.0.2'
+	*/
 
 	//Keep it simple, just pull all jar files from /lib folder
-	compile fileTree(dir: 'lib', include: '*.jar')
+	compile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
 processResources {
@@ -55,7 +72,7 @@ processResources {
         include '**/*.fxml'
     }
 }
-
+/*
 jfx {
     def verString = version.toString().split(/-/)[0]
 
@@ -74,6 +91,16 @@ jfx {
     appName = 'VeriBlock Wallet'
     nativeReleaseVersion = verString
 }
+*/
+
+javafx {
+	mainClassName = 'veriblock.wallet.Main'
+	applicationName = 'VeriBlock Wallet'
+
+	version = '12'
+	modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', "javafx.base" ]
+}
+
 
 jar {
 	manifest {

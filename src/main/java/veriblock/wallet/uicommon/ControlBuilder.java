@@ -7,16 +7,18 @@
 
 package veriblock.wallet.uicommon;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 import javafx.util.StringConverter;
-import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import veriblock.wallet.core.AppContext;
-import veriblock.wallet.core.GenericFunction;
 import veriblock.wallet.core.NavigationData;
 import veriblock.wallet.core.locale.LocaleItem;
 import veriblock.wallet.core.locale.LocaleManager;
@@ -28,12 +30,15 @@ import java.util.List;
 
 public class ControlBuilder {
 
-    public static FXMLLoader getFXMLLoader(String pageName)
-    {
-        URL fxmlPath = (new Object()).getClass().getResource(
-                String.format("/veriblock/wallet/features/%1$s.fxml", pageName));;
-        FXMLLoader loader = new FXMLLoader(fxmlPath);
-        return loader;
+    private static final Logger _logger = LoggerFactory.getLogger(ControlBuilder.class);
+
+    public static FXMLLoader getFXMLLoader(String pageName) {
+        final String route = String.format("/veriblock/wallet/features/%1$s.fxml", pageName);
+        final URL fxmlPath = ControlBuilder.class.getResource(route);
+        if (fxmlPath == null) {
+            _logger.error("Unable to locate the file " + pageName + " with the route " + route);
+        }
+        return new FXMLLoader(fxmlPath);
     }
 
     public static String showGetValueDialog(AppContext appContext, DialogGetValueInput input)
@@ -118,11 +123,10 @@ public class ControlBuilder {
         });
     }
 
-    public static void setupExportButton(Button button)
-    {
-        final Glyph DOWNLOAD = new Glyph("FontAwesome", FontAwesome.Glyph.DOWNLOAD)
-                .color(Color.valueOf(Styles.VALUE_BUTTON_GREEN));
-        button.setGraphic(DOWNLOAD);
+    public static void setupExportButton(Button button) {
+        final Text icon = GlyphsDude.createIcon(FontAwesomeIcon.DOWNLOAD);
+        icon.setFill(Color.valueOf(Styles.VALUE_BUTTON_GREEN));
+        button.setGraphic(icon);
         button.setText("");
 
         ControlHelper.setToolTip(button,

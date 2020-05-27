@@ -7,10 +7,11 @@
 
 package veriblock.wallet.features.shell;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
-import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
+import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import veriblock.wallet.core.*;
@@ -78,11 +79,6 @@ public class FooterController  extends BaseController  {
         setWalletIconState(_currentLockState, true);    //re-setting locale
     }
 
-    //region Lock Icon
-
-    private static final Glyph ICON_LOCKED = new Glyph("FontAwesome", FontAwesome.Glyph.LOCK).color(Color.valueOf(Styles.VALUE_COLOR_WHITE));
-    private static final Glyph ICON_UNLOCKED = new Glyph("FontAwesome", FontAwesome.Glyph.UNLOCK).color(Color.valueOf(Styles.VALUE_COLOR_WHITE));
-
     //Optimization - only update if changed
     private WalletLockState _currentLockState = WalletLockState.UNKNOWN;
     private void setWalletIconState(WalletLockState lockState, boolean forceOverride)
@@ -98,18 +94,18 @@ public class FooterController  extends BaseController  {
         LocaleModule lm = LocaleManager.getInstance().getModule(LocaleModuleResource.WalletService);
 
         if (lockState == WalletLockState.LOCKED) {
-            lblWalletLockIcon.setGraphic(ICON_LOCKED);
+            final Text icon = GlyphsDude.createIcon(FontAwesomeIcon.LOCK);
+            icon.setFill(Color.valueOf(Styles.VALUE_COLOR_WHITE));
+            lblWalletLockIcon.setGraphic(icon);
             lblWalletLockIcon.setVisible(true);
             this.lblWalletLockIconTooltip.setText(lm.getString("footer_lockwallet_shouldUnlocked"));
-        }
-        else if (lockState == WalletLockState.UNLOCKED)
-        {
-            lblWalletLockIcon.setGraphic(ICON_UNLOCKED);
+        } else if (lockState == WalletLockState.UNLOCKED) {
+            final Text icon = GlyphsDude.createIcon(FontAwesomeIcon.UNLOCK);
+            icon.setFill(Color.valueOf(Styles.VALUE_COLOR_WHITE));
+            lblWalletLockIcon.setGraphic(icon);
             lblWalletLockIcon.setVisible(true);
             this.lblWalletLockIconTooltip.setText(lm.getString("footer_lockwallet_shouldLocked"));
-        }
-        else
-        {
+        } else {
             lblWalletLockIcon.setVisible(false);
             this.lblWalletLockIconTooltip.setText("");
         }
