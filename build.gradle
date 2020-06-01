@@ -67,6 +67,12 @@ dependencies {
 	compile 'org.openjfx:javafx-media:11.0.2:linux'
 	compile 'org.openjfx:javafx-base:11.0.2:linux'
 
+	compile 'org.openjfx:javafx-controls:11.0.2:mac'
+	compile 'org.openjfx:javafx-fxml:11.0.2:mac'
+	compile 'org.openjfx:javafx-graphics:11.0.2:mac'
+	compile 'org.openjfx:javafx-media:11.0.2:mac'
+	compile 'org.openjfx:javafx-base:11.0.2:mac'
+
 	//Keep it simple, just pull all jar files from /lib folder
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 }
