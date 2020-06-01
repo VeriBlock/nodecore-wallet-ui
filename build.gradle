@@ -71,32 +71,16 @@ dependencies {
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
+startScripts {
+	windowsStartScriptGenerator.template = resources.text.fromFile("windowsStartScript.txt")
+}
+
 processResources {
     from ('src/main/java') {
         include '**/*.fxml'
     }
 }
-/*
-jfx {
-    def verString = version.toString().split(/-/)[0]
 
-    mainClass = 'veriblock.wallet.Main'
-    vendor = 'VeriBlock Foundation'
-    jfxMainAppJarName = "vbkwallet.jar"
-
-    manifestAttributes = ['Name': 'veriblock/wallet',
-                          'Specification-Title': 'VeriBlock Wallet',
-                          'Specification-Version': version.toString().split(/-/)[0],
-                          'Specification-Vendor': 'VeriBlock Foundation',
-                          'Implementation-Title': 'VeriBlock Wallet',
-                          'Implementation-Version': version.toString(),
-                          'Implementation-Vendor': 'VeriBlock Foundation']
-    identifier = 'a43e3a88-2518-4b87-aeb5-f9080520d348'
-    appName = 'VeriBlock Wallet'
-    nativeReleaseVersion = verString
-}
-*/
-rootProject.
 javafx {
 	mainClassName = 'veriblock.wallet.Main'
 	applicationName = 'VeriBlock Wallet'
