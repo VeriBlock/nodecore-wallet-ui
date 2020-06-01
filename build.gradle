@@ -83,7 +83,7 @@ processResources {
 
 javafx {
 	mainClassName = 'veriblock.wallet.Main'
-	applicationName = 'VeriBlock Wallet'
+	applicationName = 'veriblock-wallet-ui'
 
 	version = '12'
 	modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', "javafx.base" ]

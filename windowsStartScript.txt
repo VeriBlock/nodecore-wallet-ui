@@ -30,7 +30,7 @@ if "%DIRNAME%" == "" set DIRNAME=.\
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%${appHomeRelativePath}
 
-SET APP_TITLE=VeriBlock NodeCore CLI
+SET APP_TITLE=VeriBlock Wallet UI
 TITLE %APP_TITLE%
 
 @rem Add default JVM options here. You can also use JAVA_OPTS and ${optsEnvironmentVar} to pass JVM options to this script.
