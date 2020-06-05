@@ -104,7 +104,6 @@ public class Wallet extends Application {
         }
 
         Application.launch(Wallet.class, args);
-        launch(args);
     }
 
     //IF found commands, then run that, instead of showing the GUI app
