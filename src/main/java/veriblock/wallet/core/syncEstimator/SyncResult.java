@@ -9,8 +9,6 @@ package veriblock.wallet.core.syncEstimator;
 
 import veriblock.wallet.core.Utils;
 
-import javax.rmi.CORBA.Util;
-
 public class SyncResult {
     public SyncResult()
     {}

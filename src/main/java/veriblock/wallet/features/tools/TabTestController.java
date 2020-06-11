@@ -8,11 +8,9 @@
 package veriblock.wallet.features.tools;
 
 import javafx.scene.control.*;
-import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
-import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
+import javafx.scene.media.AudioClip;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import veriblock.wallet.core.*;
@@ -93,9 +91,6 @@ public class TabTestController  extends BaseController {
         _appContext.UIManager.setStatusMessage("Some info here...");
     }
     //endregion
-
-    private static final Glyph CONFIRM = new Glyph("FontAwesome", FontAwesome.Glyph.QUESTION_CIRCLE).color(
-        Color.valueOf("#ffffff")).sizeFactor(2);
 
     public void clickShowPrompt() {
 

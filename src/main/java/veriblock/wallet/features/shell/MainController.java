@@ -13,14 +13,16 @@
 
 package veriblock.wallet.features.shell;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import veriblock.wallet.core.locale.LocaleManager;
 import veriblock.wallet.core.locale.LocaleModule;
 import veriblock.wallet.core.locale.SupportedLocales;
 import veriblock.wallet.core.storage.UserSettings;
 import veriblock.wallet.features.LocaleModuleResource;
 import veriblock.wallet.features.SoundItem;
-import veriblock.wallet.features.wallet.AddressSummary;
 import veriblock.wallet.core.*;
 import veriblock.wallet.entities.StateInfoEntity;
 import veriblock.wallet.features.wallet.WalletService;
@@ -41,8 +43,6 @@ import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.veriblock.core.utilities.DiagnosticInfo;
@@ -57,11 +57,6 @@ public class MainController {
     public Label statusIcon;
     public TextArea lblStatusMessage;
     public HBox statusBox;
-
-    private static final Glyph INFO = new Glyph("FontAwesome", FontAwesome.Glyph.INFO_CIRCLE).color(Color.valueOf("#ffffff"));
-    private static final Glyph SUCCESS = new Glyph("FontAwesome", FontAwesome.Glyph.CHECK_CIRCLE).color(Color.valueOf("#0ab45b"));
-    private static final Glyph WARNING = new Glyph("FontAwesome", FontAwesome.Glyph.EXCLAMATION).color(Color.valueOf("orange"));
-    private static final Glyph ERROR = new Glyph("FontAwesome", FontAwesome.Glyph.TIMES_CIRCLE).color(Color.valueOf("#ff6666"));
 
     public void setPrimaryStage(Stage primaryStage)
     {
@@ -99,6 +94,7 @@ public class MainController {
 
         NodeCoreGateway ngw = NodeCoreGateway.getInstance();
         ShellService.setupNodeCoreConnection(_appContext);
+
 
         //Add footer
         try {
@@ -673,22 +669,31 @@ public class MainController {
 
             ValidationInfo.Status statusEnum = result.getStatus();
 
+            Text icon;
             switch (statusEnum) {
                 case Success:
                     this.lblStatusMessage.setStyle("-fx-text-fill: #0ab45b");
-                    statusIcon.setGraphic(SUCCESS);
+                    icon = GlyphsDude.createIcon(FontAwesomeIcon.CHECK_CIRCLE);
+                    icon.setFill(Color.valueOf("#0ab45b"));
+                    statusIcon.setGraphic(icon);
                     break;
                 case Info:
                     this.lblStatusMessage.setStyle("-fx-text-fill: #ffffff");
-                    statusIcon.setGraphic(INFO);
+                    icon = GlyphsDude.createIcon(FontAwesomeIcon.INFO_CIRCLE);
+                    icon.setFill(Color.valueOf("#ffffff"));
+                    statusIcon.setGraphic(icon);
                     break;
                 case Warning:
                     this.lblStatusMessage.setStyle("-fx-text-fill: orange");
-                    statusIcon.setGraphic(WARNING);
+                    icon = GlyphsDude.createIcon(FontAwesomeIcon.EXCLAMATION);
+                    icon.setFill(Color.ORANGE);
+                    statusIcon.setGraphic(icon);
                     break;
                 case Error:
                     this.lblStatusMessage.setStyle("-fx-text-fill: #ff6666");
-                    statusIcon.setGraphic(ERROR);
+                    icon = GlyphsDude.createIcon(FontAwesomeIcon.TIMES_CIRCLE);
+                    icon.setFill(Color.valueOf("#ff6666"));
+                    statusIcon.setGraphic(icon);
                     break;
             }
         }

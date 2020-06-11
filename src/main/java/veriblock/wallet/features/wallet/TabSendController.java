@@ -33,7 +33,7 @@ public class TabSendController  extends BaseController  {
     private static final Logger _logger = LoggerFactory.getLogger(TabSendController.class);
 
     public void initialize() {
-        //btnSend.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.SEND).color(Color.valueOf("#0ab45b")));
+
     }
 
     public void init() {

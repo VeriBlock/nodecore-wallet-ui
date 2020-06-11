@@ -7,21 +7,18 @@
 
 package veriblock.wallet.uicommon;
 
-import javafx.application.Platform;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import javafx.util.Pair;
-import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
 import veriblock.wallet.core.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
@@ -43,18 +40,6 @@ import java.text.NumberFormat;
 import java.util.Optional;
 
 public class ControlHelper {
-
-    private static final Glyph CONFIRM_INFO = new Glyph("FontAwesome", FontAwesome.Glyph.QUESTION_CIRCLE).color(
-        Color.valueOf("#ffffff")).sizeFactor(2);
-
-    private static final Glyph CONFIRM_ALERT = new Glyph("FontAwesome", FontAwesome.Glyph.WARNING).color(
-            Color.valueOf("orange")).sizeFactor(2);
-
-    private static final Glyph CONFIRM_ERROR = new Glyph("FontAwesome", FontAwesome.Glyph.TIMES_CIRCLE).color(
-            Color.valueOf("ff6666")).sizeFactor(2);
-
-    private static final Glyph CONFIRM_SUCCESS = new Glyph("FontAwesome", FontAwesome.Glyph.CHECK_CIRCLE).color(
-            Color.valueOf("0ab45b")).sizeFactor(2);
 
     public static void setImage(ImageView image, String filePath) {
         //Must handle redistributable for deploy
@@ -387,21 +372,25 @@ public class ControlHelper {
             alert.getDialogPane().setContent(textCopy);
         }
 
+        Text icon;
         if (vi.isWarning()) {
-            alert.setGraphic(CONFIRM_ALERT);
+            icon = GlyphsDude.createIcon(FontAwesomeIcon.WARNING, "2em");
+            icon.setFill(Color.ORANGE);
+            alert.setGraphic(icon);
+        } else if (vi.isError()) {
+            icon = GlyphsDude.createIcon(FontAwesomeIcon.TIMES_CIRCLE, "2em");
+            icon.setFill(Color.valueOf("#ff6666"));
+            alert.setGraphic(icon);
+        } else if (vi.isSuccess()) {
+            icon = GlyphsDude.createIcon(FontAwesomeIcon.CHECK_CIRCLE, "2em");
+            icon.setFill(Color.valueOf("#0ab45b"));
+            alert.setGraphic(icon);
+        } else {
+            icon = GlyphsDude.createIcon(FontAwesomeIcon.QUESTION_CIRCLE, "2em");
+            icon.setFill(Color.valueOf("#ffffff"));
+            alert.setGraphic(icon);
         }
-        else if (vi.isError())
-        {
-            alert.setGraphic(CONFIRM_ERROR);
-        }
-        else if (vi.isSuccess())
-        {
-            alert.setGraphic(CONFIRM_SUCCESS);
-        }
-        else {
-            alert.setGraphic(CONFIRM_INFO);
-        }
-        //alert.initStyle(StageStyle.UNDECORATED);
+
         alert.initStyle(StageStyle.UTILITY);
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(Utils.resourceAsExternal("default.css"));
