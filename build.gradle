@@ -115,3 +115,14 @@ nebulaRelease {
 ext {
     println "##teamcity[buildNumber \'${version}\']"
 }
+
+distributions {
+	main {
+		contents {
+			from("${rootProject.projectDir}") {
+				include("README.md")
+				into("bin")
+			}
+		}
+	}
+}
