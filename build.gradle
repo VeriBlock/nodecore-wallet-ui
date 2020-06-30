@@ -119,7 +119,7 @@ ext {
 distributions {
 	main {
 		contents {
-			from("${rootProject.projectDir}") {
+			from("${rootProject.projectDir}/dist") {
 				include("README.md")
 				into("bin")
 			}

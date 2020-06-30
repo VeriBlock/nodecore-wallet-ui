@@ -29,9 +29,3 @@ To perform a full build, run the following
 
     ./gradlew clean build (linux/mac)
     ./gradlew.bat clean build (windows)
-    
-### Troubleshooting
-If you get this error, then you probably need to install OpenJdk13+:
-```
-Exception in thread "main" java.lang.UnsupportedClassVersionError
-```
