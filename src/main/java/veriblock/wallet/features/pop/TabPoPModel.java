@@ -7,9 +7,7 @@
 
 package veriblock.wallet.features.pop;
 
-import veriblock.wallet.core.pop.entities.ConfigEntity;
-import veriblock.wallet.core.pop.entities.MinerPropertiesEntity;
-import veriblock.wallet.core.pop.entities.OperationEntity;
+import veriblock.wallet.core.pop.entities.*;
 import veriblock.wallet.entities.PoPEndorsementInfoEntity;
 
 import java.util.List;
@@ -39,25 +37,34 @@ public class TabPoPModel {
     public boolean isConnected;
     public boolean didUserCancelConnectDialog;
 
-    public ConfigEntity getConfig() {
-        return _config;
+    public AutoMineConfigEntity getAutoMineConfig() {
+        return autoMineConfig;
     }
 
-    public void setConfig(ConfigEntity config) {
-        this._config = config;
+    public BtcFeeConfigEntity getBtcFeeConfigEntity() {
+        return btcFeeConfigEntity;
     }
 
-    public List<OperationEntity> getPopOperationEntities() {
+    public void setAutoMineConfig(AutoMineConfigEntity autoMineConfig) {
+        this.autoMineConfig = autoMineConfig;
+    }
+
+    public void setBtcFeeConfigEntity(BtcFeeConfigEntity btcFeeConfigEntity) {
+        this.btcFeeConfigEntity = btcFeeConfigEntity;
+    }
+
+    public List<OperationSummaryEntity> getPopOperationEntities() {
         return popOperationEntities;
     }
 
-    public void setPopOperationEntities(List<OperationEntity> popOperationEntities) {
+    public void setPopOperationEntities(List<OperationSummaryEntity> popOperationEntities) {
         this.popOperationEntities = popOperationEntities;
     }
 
-    private ConfigEntity _config;
+    private AutoMineConfigEntity autoMineConfig;
+    private BtcFeeConfigEntity btcFeeConfigEntity;
     private boolean isPopServiceConnected;
-    private List<OperationEntity> popOperationEntities;
+    private List<OperationSummaryEntity> popOperationEntities;
 
     public MinerPropertiesEntity getMinerProperties() {
         return minerProperties;

@@ -7,15 +7,8 @@
 
 package veriblock.tests;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.junit.Assert;
 import org.junit.Test;
-import veriblock.wallet.core.pop.PopAction;
-import veriblock.wallet.core.pop.PopEntityParser;
-import veriblock.wallet.core.pop.PopStatus;
-import veriblock.wallet.core.pop.entities.MineResultEntity;
 import veriblock.wallet.features.pop.PopService;
 
 

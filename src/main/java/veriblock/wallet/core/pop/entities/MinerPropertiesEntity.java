@@ -7,10 +7,11 @@
 
 package veriblock.wallet.core.pop.entities;
 
-public class MinerPropertiesEntity {
+import java.util.List;
 
-    public String minerAddress;
+public class MinerPropertiesEntity {
     public String bitcoinAddress;
     public long bitcoinBalance;
-    public String[] walletSeeds;
+    public String minerAddress;
+    public List<String> walletSeed;
 }

@@ -1,60 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="450.0" minWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.pop.OperationDetailController">
+<AnchorPane minHeight="450.0" minWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.pop.OperationDetailController">
    <children>
-      <VBox prefHeight="410.0" prefWidth="678.0">
+      <VBox prefHeight="410.0" prefWidth="1190">
          <children>
-            <HBox prefHeight="30.0" prefWidth="678">
+            <HBox prefHeight="30.0" prefWidth="1190">
                <children>
                   <Pane fx:id="workflow1" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
                      <children>
-                        <Label fx:id="lblWrkflow1" styleClass="workflow-text" text="Ready" />
+                        <Label fx:id="lblWrkflow1" styleClass="workflow-text" text="Initial" />
                      </children>
                   </Pane>
                   <Pane fx:id="workflow2" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
                      <children>
-                        <Label fx:id="lblWrkflow2" styleClass="workflow-text" text="Publish" />
+                        <Label fx:id="lblWrkflow2" styleClass="workflow-text" text="Instruction" />
                      </children>
                   </Pane>
-                  <Pane fx:id="workflow3" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                  <Pane fx:id="workflow3" prefHeight="30.0" prefWidth="160.0" styleClass="workflow-notdone">
                      <children>
-                        <Label fx:id="lblWrkflow3" styleClass="workflow-text" text="Transact" />
+                        <Label fx:id="lblWrkflow3" styleClass="workflow-text" text="Endorsement Transaction" />
                      </children>
                   </Pane>
                    <Pane fx:id="workflow4" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
                        <children>
-                           <Label fx:id="lblWrkflow4" styleClass="workflow-text" text="Wait" />
+                           <Label fx:id="lblWrkflow4" styleClass="workflow-text" text="Confirmed" />
                        </children>
                    </Pane>
-                   <Pane fx:id="workflow5" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                   <Pane fx:id="workflow5" prefHeight="30.0" prefWidth="160.0" styleClass="workflow-notdone">
                        <children>
-                           <Label fx:id="lblWrkflow5" styleClass="workflow-text" text="Proof" />
+                           <Label fx:id="lblWrkflow5" styleClass="workflow-text" text="Block of Proof" />
                        </children>
                    </Pane>
                    <Pane fx:id="workflow6" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
                        <children>
-                           <Label fx:id="lblWrkflow6" styleClass="workflow-text" text="Context" />
+                           <Label fx:id="lblWrkflow6" styleClass="workflow-text" text="Proven" />
                        </children>
                    </Pane>
                    <Pane fx:id="workflow7" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
                        <children>
-                           <Label fx:id="lblWrkflow7" styleClass="workflow-text" text="Submit" />
+                           <Label fx:id="lblWrkflow7" styleClass="workflow-text" text="Context" />
                        </children>
                    </Pane>
-                   <Pane fx:id="workflow8" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                   <Pane fx:id="workflow8" prefHeight="30.0" prefWidth="160.0" styleClass="workflow-notdone">
                        <children>
-                           <Label fx:id="lblWrkflow8" styleClass="workflow-text" text="Confirm" />
+                           <Label fx:id="lblWrkflow8" styleClass="workflow-text" text="Submitted PoP data" />
                        </children>
                    </Pane>
-                   <Pane fx:id="workflow9" prefHeight="30.0" prefWidth="80.0" styleClass="workflow-notdone">
+                   <Pane fx:id="workflow9" prefHeight="30.0" prefWidth="160.0" styleClass="workflow-notdone">
                        <children>
-                           <Label fx:id="lblWrkflow9" styleClass="workflow-text" text="Done!" />
+                           <Label fx:id="lblWrkflow9" styleClass="workflow-text" text="Payout detected!" />
                        </children>
                    </Pane>
                </children>

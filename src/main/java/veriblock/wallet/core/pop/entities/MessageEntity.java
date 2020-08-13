@@ -7,15 +7,11 @@
 
 package veriblock.wallet.core.pop.entities;
 
+import java.util.List;
+
 public class MessageEntity {
-
-    public MessageEntity() {
-
-    }
-
     public String code;
     public String message;
-    public String details;
+    public List<String> details;
     public boolean error;
-
 }

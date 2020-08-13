@@ -134,9 +134,11 @@ public class ControlHelper {
         // add masking:
         textField.textProperty().addListener(new ChangeListener<String>() {
              @Override
-             public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                 String newValue) {
-
+             public void changed(
+                     ObservableValue<? extends String> observable,
+                     String oldValue,
+                     String newValue
+             ) {
                  //avoid: local variables referenced from an inner class must be final or effectively final
                  Integer finalMaxLength = maxLength;
 
@@ -154,12 +156,12 @@ public class ControlHelper {
                         ascbsjdfjdsfd
 
                           */
-                         if (newValue.length() == 0)
-                         {
+                         if (newValue.length() == 0) {
                              //ok
                          }
                          else if (!newValue.matches("^V[A-Za-z0-9]{0,35}$")) {
                              textField.setText(oldValue);
+                             showAlertYesNoDialog(newValue.replace(oldValue, "") + " is not a valid character for a VBK address");
                          }
                          break;
 

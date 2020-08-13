@@ -24,6 +24,7 @@ import veriblock.wallet.core.locale.LocaleManager;
 import veriblock.wallet.core.locale.LocaleModule;
 import veriblock.wallet.core.pop.*;
 import veriblock.wallet.core.pop.entities.*;
+import veriblock.wallet.core.pop.entities.OperationSummaryEntity;
 import veriblock.wallet.entities.PoPEndorsementInfoEntity;
 import veriblock.wallet.features.LocaleModuleResource;
 import veriblock.wallet.features.SoundItem;
@@ -37,6 +38,9 @@ import veriblock.wallet.uicommon.IntegrationLinks;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static veriblock.wallet.core.pop.ConfigConstants.Key.BITCOIN_FEE_MAX;
+import static veriblock.wallet.core.pop.ConfigConstants.Key.BITCOIN_FEE_PERKB;
 
 public class TabPoPController extends BaseController {
 
@@ -299,11 +303,11 @@ public class TabPoPController extends BaseController {
         else
         {
             //update UI, message
-            ConfigEntity testConfig = new ConfigEntity();
-            testConfig.autoMineRound1 = autoMineModel.shouldMineRound1;
-            testConfig.autoMineRound2 = autoMineModel.shouldMineRound2;
-            testConfig.autoMineRound3 = autoMineModel.shouldMineRound3;
-            testConfig.autoMineRound4 = autoMineModel.shouldMineRound4;
+            AutoMineConfigEntity testConfig = new AutoMineConfigEntity();
+            testConfig.round1 = autoMineModel.shouldMineRound1;
+            testConfig.round2 = autoMineModel.shouldMineRound2;
+            testConfig.round3 = autoMineModel.shouldMineRound3;
+            testConfig.round4 = autoMineModel.shouldMineRound4;
 
             String roundList = updateAutoMineUI(testConfig);
 
@@ -329,10 +333,9 @@ public class TabPoPController extends BaseController {
             return;
         }
 
-        OperationEntity input = new OperationEntity();
+        OperationSummaryEntity input = new OperationSummaryEntity();
         input.operationId = row.operationId;
-        input.actionMessage = row.actionMessage;
-        input.message = row.message;
+        input.action = row.actionMessage;
 
         //String opId = row.operationId;
         NavigationData navigationData = new NavigationData();
@@ -371,7 +374,7 @@ public class TabPoPController extends BaseController {
     ObservableList<OperationRow> _tableList;
 
     //returns any new entities in grid that weren't passed in
-    private List<OperationEntity> refreshGridOperations(List<OperationEntity> entities) {
+    private List<OperationSummaryEntity> refreshGridOperations(List<OperationSummaryEntity> entities) {
         entities = applyFilter(entities, _popModel.currentBlock);
         if (entities != null && entities.size() == 0) {
             //no longer just checking for data
@@ -381,10 +384,10 @@ public class TabPoPController extends BaseController {
         //Merge in | indeed have listoperations return the official data and refresh it
         //Makes the grid much more responsive, especially as we auto-update every N seconds
 
-        List<OperationEntity> newEntities = new ArrayList<>();
+        List<OperationSummaryEntity> newEntities = new ArrayList<>();
         //STEP 1: Check Entities
         for (int i = 0; i < entities.size(); i++) {
-            OperationEntity entity = entities.get(i);
+            OperationSummaryEntity entity = entities.get(i);
 
             //Does entity exist in grid?
             //  Yes -->
@@ -414,7 +417,7 @@ public class TabPoPController extends BaseController {
         //STEP 2: Check Grid
         List<OperationRow> itemsToRemove = new ArrayList<>();
         for (OperationRow row : _tableList) {
-            OperationEntity entity = getOperationEntity(row.getOperationId(), entities);
+            OperationSummaryEntity entity = getOperationSummaryResponse(row.getOperationId(), entities);
             if (entity == null) {
                 //Exists in tableview, does NOT exist in entities, therefore remove from tableview
                 itemsToRemove.add(row);
@@ -451,14 +454,14 @@ public class TabPoPController extends BaseController {
         return null;
     }
 
-    private OperationEntity getOperationEntity(String operationId, List<OperationEntity> entities)
+    private OperationSummaryEntity getOperationSummaryResponse(String operationId, List<OperationSummaryEntity> entities)
     {
         if (entities == null || operationId == null)
         {
             return null;
         }
 
-        for(OperationEntity row : entities)
+        for(OperationSummaryEntity row : entities)
         {
             if (row.operationId != null && row.operationId.equals(operationId))
             {
@@ -470,7 +473,7 @@ public class TabPoPController extends BaseController {
         return null;
     }
 
-    private List<OperationEntity> applyFilter(List<OperationEntity> entities, int iCurrentBlock)
+    private List<OperationSummaryEntity> applyFilter(List<OperationSummaryEntity> entities, int iCurrentBlock)
     {
         if (entities == null || entities.size() == 0)
         {
@@ -487,11 +490,11 @@ public class TabPoPController extends BaseController {
 
         //purge all blocks older than N with status = FAILED
         int rewardInXBlocks = PopService.rewardPaidInXBlocks();
-        List<OperationEntity> entities2 = new ArrayList<>();
-        for (OperationEntity op : entities)
+        List<OperationSummaryEntity> entities2 = new ArrayList<>();
+        for (OperationSummaryEntity op : entities)
         {
             //RULE: purge old failed blocks, as they have no future
-            if (op.status == PopStatus.FAILED &&
+            if (op.state.equalsIgnoreCase(PoPOperationState.FAILED.name()) &&
                     op.endorsedBlockNumber + iThresholdToKeepFailedBlock < iCurrentBlock)
             {
                 //BAD, don't add it
@@ -590,14 +593,14 @@ public class TabPoPController extends BaseController {
         SoundItem.playButtonClick();
         String fieldLabel = _localeModule.getString("TabPoP_clickUpdateBtcMax");
         GenericFunction<ValidationInfo, String> testFunc = getValidationFunction(fieldLabel);
-        updateConfig(fieldLabel, ConfigConstants.Key.BITCOIN_FEE_MAX, testFunc);
+        updateConfig(fieldLabel, BITCOIN_FEE_MAX, testFunc);
      }
 
     public void clickUpdateBtcFeeKB() {
         SoundItem.playButtonClick();
         String fieldLabel = _localeModule.getString("TabPoP_clickUpdateBtcFeeKB");
         GenericFunction<ValidationInfo, String> testFunc = getValidationFunction(fieldLabel);
-        updateConfig(fieldLabel, ConfigConstants.Key.BITCOIN_FEE_PERKB, testFunc);
+        updateConfig(fieldLabel, BITCOIN_FEE_PERKB, testFunc);
     }
 
     //TODO --> differentiate this further between fee and max (200x different)
@@ -605,19 +608,16 @@ public class TabPoPController extends BaseController {
     {
         GenericFunction<ValidationInfo, String> testFunc = (strInput) -> {
             ValidationInfo vi = new ValidationInfo();
-            long result = VbkUtils.convertDecimalCoinToAtomicLong(strInput);
-            long errorThreshold = VbkUtils.convertDecimalCoinToAtomicLong("1.0");
-            long warningThreshold = VbkUtils.convertDecimalCoinToAtomicLong("0.01");
-
-            if (result > errorThreshold)
+            long result = Long.valueOf(strInput);
+            if (result > 100000)
             {
                 vi.setMessageError(String.format(_localeModule.getString("TabPoP_updateConfig_error"), fieldLabel,
-                        VbkUtils.convertAtomicToVbkString(result)));
+                        result));
             }
-            else if (result > warningThreshold)
+            else if (result > 50000)
             {
                 vi.setMessageWarning(String.format(_localeModule.getString("TabPoP_updateConfig_warning"), fieldLabel,
-                        VbkUtils.convertAtomicToVbkString(result)));
+                        result));
             }
 
             return vi;
@@ -625,6 +625,7 @@ public class TabPoPController extends BaseController {
 
         return testFunc;
     }
+
     //return true if updated
     public void updateConfig(String fieldLabel, ConfigConstants.Key configKey, GenericFunction<ValidationInfo, String> testFunc ) {
 
@@ -633,17 +634,17 @@ public class TabPoPController extends BaseController {
         long initValue = 0;
         switch (configKey) {
             case BITCOIN_FEE_MAX:
-                initValue = _popModel.getConfig().bitcoinFeeMax;
+                initValue = _popModel.getBtcFeeConfigEntity().maxFee;
                 break;
             case BITCOIN_FEE_PERKB:
-                initValue = _popModel.getConfig().bitcoinFeePerKb;
+                initValue = _popModel.getBtcFeeConfigEntity().feePerKB;
                 break;
         }
 
         DialogGetValueInput dialogInput = new DialogGetValueInput();
         dialogInput.valueEmptyPrompt = VbkUtils.getEmptyVbkString();
         dialogInput.message = String.format(_localeModule.getString("TabPoP_updateConfig_header"), fieldLabel);
-        dialogInput.initialValue = VbkUtils.convertAtomicToVbkString(initValue);
+        dialogInput.initialValue = String.valueOf(initValue);
         dialogInput.dataMaskType = ControlHelper.MaskType.VbkAmountPositive;
         dialogInput.validationFunc = testFunc;
 
@@ -657,39 +658,32 @@ public class TabPoPController extends BaseController {
         }
 
         //Got value from UI
-        long newValueAtomic = (long)VbkUtils.convertDecimalCoinToAtomicLong(strResult);
-        SetConfigEntity result = _clientProxy.setConfig(configKey, Long.toString(newValueAtomic));
-        if (result.failed)
-        {
-            //boo!
-            String errorMessage = "";
-            if (result.messages.length > 0)
-            {
-                errorMessage = result.messages[0].message;
-            }
-            _appContext.UIManager.setStatusMessageError(String.format(_localeModule.getString("TabPoP_updateConfig_error"),
-                    fieldLabel,  errorMessage));
-            return;
+        long newValue = Long.parseLong(strResult);
+
+        final BtcFeeConfigEntity btcFeeConfigEntity = new BtcFeeConfigEntity();
+        if (configKey == BITCOIN_FEE_MAX) {
+            btcFeeConfigEntity.maxFee = newValue;
+            btcFeeConfigEntity.feePerKB = _popModel.getBtcFeeConfigEntity().feePerKB;
         }
-        else
-        {
-            //yay!
-
-            //update UI
-            switch (configKey) {
-                case BITCOIN_FEE_MAX:
-                    _popModel.getConfig().bitcoinFeeMax = newValueAtomic;
-                    break;
-                case BITCOIN_FEE_PERKB:
-                    _popModel.getConfig().bitcoinFeePerKb = newValueAtomic;
-                    break;
-            }
-
-            applyModelToUI_Config();
-
-            _appContext.UIManager.setStatusMessageSucess(
-                    String.format(_localeModule.getString("TabPoP_updateConfig_success"), fieldLabel, strResult));
+        if (configKey == BITCOIN_FEE_PERKB) {
+            btcFeeConfigEntity.maxFee = _popModel.getBtcFeeConfigEntity().maxFee;
+            btcFeeConfigEntity.feePerKB = newValue;
         }
+        _clientProxy.setBtcFee(btcFeeConfigEntity);
+
+        switch (configKey) {
+            case BITCOIN_FEE_MAX:
+                _popModel.getBtcFeeConfigEntity().maxFee = newValue;
+                break;
+            case BITCOIN_FEE_PERKB:
+                _popModel.getBtcFeeConfigEntity().feePerKB = newValue;
+                break;
+        }
+
+        applyModelToUI_Config();
+
+        _appContext.UIManager.setStatusMessageSucess(
+                String.format(_localeModule.getString("TabPoP_updateConfig_success"), fieldLabel, strResult));
     }
 
     //endregion
@@ -800,13 +794,13 @@ public class TabPoPController extends BaseController {
         {
             String errorMessage= "";
             //1st try
-            if (result.messages.length > 0) {
-                errorMessage = result.messages[0].details;
+            if (result.messages.size() > 0) {
+                errorMessage = result.messages.get(0).details.get(0);
             }
             //2nd try:
             if (errorMessage == null || errorMessage.length() == 0)
             {
-                errorMessage = result.messages[0].message;
+                errorMessage = result.messages.get(0).message;
             }
             //3rd try
             if (errorMessage == null || errorMessage.length() == 0)
@@ -875,29 +869,19 @@ public class TabPoPController extends BaseController {
         }
     }
 
-    public void doTest() {
-        String s = "24f8efc1";
-        OperationDetailEntity result = _clientProxy.getOperation(s);
-        //Integer bitcoinFeeMax = _popModel.getConfig().getBitcoinFeeMax();
-
-        //_appContext.UIManager.setStatusMessage(String.format("Got Bitcoin Fee Max: %1$s", bitcoinFeeMax));
-
-        int i = 0;
-
-    }
-
     //region Background loop
 
     private void updateModelFromServiceLoop()
     {
         try {
-            ConfigEntity configTest = _clientProxy.getConfig();
-            //TODO - better api check?
-            if (configTest != null && configTest.bitcoinFeeMax != 0)
+            AutoMineConfigEntity autoMineConfigEntity = _clientProxy.getAutoMineConfig();
+            BtcFeeConfigEntity btcFeeConfigEntity = _clientProxy.getBtcFeeConfig();
+            if (autoMineConfigEntity != null && btcFeeConfigEntity != null)
             {
                 _popModel.isConnected = true;
                 //If config isn't ready, no point to check the others
-                _popModel.setConfig(configTest);
+                _popModel.setBtcFeeConfigEntity(btcFeeConfigEntity);
+                _popModel.setAutoMineConfig(autoMineConfigEntity);
                 _popModel.setPopOperationEntities(_clientProxy.getOperations());
 
                 //MinerProperties is special - very first hit when PoP first starts will have seeds
@@ -1065,8 +1049,8 @@ public class TabPoPController extends BaseController {
 
         updateUIForConnectedStatus(true);
 
-        ConfigEntity config = _popModel.getConfig();
-        if (config == null)
+        AutoMineConfigEntity autoMineConfigEntity = _popModel.getAutoMineConfig();
+        if (autoMineConfigEntity == null)
         {
             //Should not be hit
             return;
@@ -1090,11 +1074,11 @@ public class TabPoPController extends BaseController {
         }
 
         //Update automine
-        updateAutoMineUI(_popModel.getConfig());
+        updateAutoMineUI(autoMineConfigEntity);
 
         //Bind to grid
-        List<OperationEntity> ops = _popModel.getPopOperationEntities();
-        List<OperationEntity> newEntities = refreshGridOperations(ops);
+        List<OperationSummaryEntity> ops = _popModel.getPopOperationEntities();
+        List<OperationSummaryEntity> newEntities = refreshGridOperations(ops);
         String strNewEntitiesStatus = createNewEntityStatusMessage( newEntities);
 
         //Bind to rewards grid
@@ -1118,7 +1102,7 @@ public class TabPoPController extends BaseController {
     }
 
     //Returns list of rounds
-    private String updateAutoMineUI(ConfigEntity entity) {
+    private String updateAutoMineUI(AutoMineConfigEntity entity) {
         String message = "";
         String roundList = null;
         if (entity == null) {
@@ -1146,7 +1130,7 @@ public class TabPoPController extends BaseController {
         return roundList;
     }
 
-    private String createNewEntityStatusMessage(List<OperationEntity> newEntities)
+    private String createNewEntityStatusMessage(List<OperationSummaryEntity> newEntities)
     {
         if (newEntities == null || newEntities.size() == 0)
         {
@@ -1205,11 +1189,10 @@ public class TabPoPController extends BaseController {
                 String.format(_localeModule.getString("TabPoP_button_mine_tooltip")));
     }
 
-    private void applyModelToUI_Config()
-    {
-        ConfigEntity config = _popModel.getConfig();
-        this.hlnkBtcFeeKB.setText(VbkUtils.convertAtomicToVbkString( config.bitcoinFeePerKb));
-        this.hlnkBtcMax.setText(VbkUtils.convertAtomicToVbkString( config.bitcoinFeeMax));
+    private void applyModelToUI_Config() {
+        final BtcFeeConfigEntity btcFeeConfigEntity = _popModel.getBtcFeeConfigEntity();
+        this.hlnkBtcFeeKB.setText(String.valueOf(btcFeeConfigEntity.feePerKB));
+        this.hlnkBtcMax.setText(String.valueOf(btcFeeConfigEntity.maxFee));
     }
 
     public TextField lnkBtcAmount;
@@ -1354,7 +1337,7 @@ public class TabPoPController extends BaseController {
             {
                 currentBlock = _popModel.currentBlock;
             }
-            return getColumnRewardMessage(PopStatus.RUNNING.toString(),
+            return getColumnRewardMessage(PoPOperationState.INITIAL.name(),
                     this.endorsedBlock, currentBlock);
         }
 
@@ -1395,17 +1378,15 @@ public class TabPoPController extends BaseController {
             }
         }
 
-        public OperationRow(OperationEntity e) {
+        public OperationRow(OperationSummaryEntity e) {
             updateFromEntity(e);
         }
 
-        public void updateFromEntity(OperationEntity e)
-        {
+        public void updateFromEntity(OperationSummaryEntity e) {
             this.setOperationId(e.operationId);
-            this.setStatus(e.status.toString());
-            this.setActionMessage(e.actionMessage);
+            this.setStatus(e.state);
+            this.setActionMessage(e.action);
             this.setEndorsedBlockNumber(e.endorsedBlockNumber);
-            this.setMessage(e.message);
         }
 
         public String getOperationId() {
@@ -1477,7 +1458,7 @@ public class TabPoPController extends BaseController {
     private String getColumnRewardMessage(String status, int endorsedBlockNumber, int currentBlock)
     {
         //Case: State == Failed
-        if (status != null && status.toUpperCase().equals(PopStatus.FAILED.toString()))
+        if (status != null && status.equalsIgnoreCase(PoPOperationState.FAILED.name()))
         {
             //nothing to show
             return "";
