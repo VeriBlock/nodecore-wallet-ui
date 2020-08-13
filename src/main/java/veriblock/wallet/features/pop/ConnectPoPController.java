@@ -31,6 +31,8 @@ import veriblock.wallet.features.shell.SettingsConstants;
 import veriblock.wallet.uicommon.BackgroundTask;
 import veriblock.wallet.uicommon.ControlHelper;
 
+import java.util.List;
+
 
 public class ConnectPoPController extends DialogController {
 
@@ -169,15 +171,14 @@ public class ConnectPoPController extends DialogController {
     public void background_loop()
     {
         MinerPropertiesEntity minerProps = _clientProxy.getMinerPropertiesEntity();
-        if (minerProps != null
-                && (minerProps.minerAddress != null || minerProps.walletSeeds != null ))
+        if (minerProps != null && (minerProps.minerAddress != null || minerProps.walletSeed != null ))
         {
             //minerAddress should always be populated.
             //walletSeeds populated only on 1st run
-            if (minerProps.walletSeeds != null)
+            if (minerProps.walletSeed != null)
             {
                 //Capture seeds on 1st run
-                _walletSeeds = minerProps.walletSeeds;
+                _walletSeeds = minerProps.walletSeed;
                 _btcAddress = minerProps.bitcoinAddress;
             }
 
@@ -189,7 +190,7 @@ public class ConnectPoPController extends DialogController {
     private boolean _isPopReady = false;
     private int _waitAttempts = 0;
 
-    private  String[] _walletSeeds;
+    private List<String> _walletSeeds;
     private String _btcAddress;
 
     public void background_done() {
@@ -247,29 +248,20 @@ public class ConnectPoPController extends DialogController {
         }
     }
 
-    public static String createSeedMessage(String[] seedCsv, LocaleModule localeModule )
+    public static String createSeedMessage(List<String> seedCsv, LocaleModule localeModule )
     {
         //if first char is digits, then use at create stamp
 
-        if (seedCsv == null || seedCsv.length == 0)
+        if (seedCsv == null || seedCsv.isEmpty())
         {
             return null;
         }
-
-        /*
-            WALLET CREATION TIME:
-                    1549402633
-            SEED WORDS:
-                    thunder
-                    number
-                    drill
-        */
 
         StringBuilder sb = new StringBuilder();
 
         int iSeedStart = 0;
 
-        String createTime = seedCsv[0];
+        String createTime = seedCsv.get(0);
         if (Utils.isLong(createTime)) {
             sb.append(localeModule.getString("ConnectPoP_firsttime_walletCreateTime") + ":\n");
             sb.append("\t" + createTime + "\n");
@@ -278,9 +270,9 @@ public class ConnectPoPController extends DialogController {
         }
 
         sb.append(localeModule.getString("ConnectPoP_firsttime_seedwords") + ":\n");
-        for (int i = iSeedStart; i < seedCsv.length; i++)
+        for (int i = iSeedStart; i < seedCsv.size(); i++)
         {
-            sb.append("\t" + seedCsv[i] + "\n");
+            sb.append("\t" + seedCsv.get(i) + "\n");
         }
 
         return sb.toString();

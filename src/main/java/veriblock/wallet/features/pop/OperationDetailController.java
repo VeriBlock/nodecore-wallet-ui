@@ -11,12 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.veriblock.core.utilities.Utility;
 import veriblock.wallet.core.*;
 import veriblock.wallet.core.locale.LocaleManager;
 import veriblock.wallet.core.locale.LocaleModule;
 import veriblock.wallet.core.pop.*;
 import veriblock.wallet.core.pop.entities.OperationDetailEntity;
-import veriblock.wallet.core.pop.entities.OperationEntity;
+import veriblock.wallet.core.pop.entities.OperationSummaryEntity;
 import veriblock.wallet.features.LocaleModuleResource;
 import veriblock.wallet.features.SoundItem;
 import veriblock.wallet.uicommon.ControlHelper;
@@ -40,10 +41,10 @@ public class OperationDetailController extends DialogController {
 
         setLocale();
 
-        OperationEntity inputData = (OperationEntity)_navigationData.getData();
+        OperationSummaryEntity inputData = (OperationSummaryEntity)_navigationData.getData();
         operationId = inputData.operationId;
-        actionMessage = inputData.actionMessage;
-        detailMessage = inputData.message;
+        actionMessage = inputData.action;
+        detailMessage = inputData.state;
 
         //operationId = _
         //set current props
@@ -106,25 +107,22 @@ public class OperationDetailController extends DialogController {
     private void applyModelToUI()
     {
         this.lblOpId.setText(opDetailModel.operationId);
-        this.lblVbkAddress.setText(opDetailModel.vbkMinerAddress);
-        this.lblOpReturnData.setText(opDetailModel.opReturnHex);
+        String minerAddress = opDetailModel.detail.getOrDefault("minerAddressBytes", "");
+        this.lblVbkAddress.setText(minerAddress);
+        this.lblOpReturnData.setText(opDetailModel.detail.getOrDefault("publicationData", ""));
 
-        if (opDetailModel.vbkPopTransactionId == null || opDetailModel.vbkPopTransactionId.length() == 0) {
+        if (!opDetailModel.detail.containsKey("proofOfProofId")) {
             this.hlnkVbkTxId.setText(_localeModule.getString("OperationDetail_status_noVbkTx"));
             this.hlnkVbkTxId.setDisable(true);
-        }
-        else
-        {
-            this.hlnkVbkTxId.setText(opDetailModel.vbkPopTransactionId);
+        } else {
+            this.hlnkVbkTxId.setText(opDetailModel.detail.get("proofOfProofId"));
         }
 
-        if (opDetailModel.btcTransactionId == null || opDetailModel.btcTransactionId.length() == 0) {
+        if (!opDetailModel.detail.containsKey("btcEndorsementTransactionId")) {
             this.hlnkBtcTxId.setText(_localeModule.getString("OperationDetail_status_noBtcTx"));
             this.hlnkBtcTxId.setDisable(true);
-        }
-        else
-        {
-            this.hlnkBtcTxId.setText(opDetailModel.btcTransactionId);
+        } else {
+            this.hlnkBtcTxId.setText(opDetailModel.detail.get("btcEndorsementTransactionId"));
         }
 
         this.lblCurrentAction.setText(actionMessage);
@@ -186,23 +184,21 @@ public class OperationDetailController extends DialogController {
 
     public void clickVbkTxId()
     {
-        if (opDetailModel.vbkPopTransactionId == null)
-        {
+        if (!opDetailModel.detail.containsKey("proofOfProofId")) {
             return;
         }
         IntegrationLinks links = IntegrationLinks.getInstance();
-        String url = links.getVbkTransactionUrl(opDetailModel.vbkPopTransactionId);
+        String url = links.getVbkTransactionUrl(opDetailModel.detail.get("proofOfProofId"));
         Utils.openLink(url);
     }
 
     public void clickBtcTxId()
     {
-        if (opDetailModel.btcTransactionId == null)
-        {
+        if (!opDetailModel.detail.containsKey("btcEndorsementTransactionId")) {
             return;
         }
         IntegrationLinks links = IntegrationLinks.getInstance();
-        String url = links.getBtcTransactionUrl(opDetailModel.btcTransactionId);
+        String url = links.getBtcTransactionUrl(opDetailModel.detail.get("btcEndorsementTransactionId"));
         Utils.openLink(url);
     }
 
@@ -243,11 +239,9 @@ public class OperationDetailController extends DialogController {
         }
 
         //set current style
-        if (opDetailModel.status == PopStatus.FAILED)
-        {
+        if (opDetailModel.status.equalsIgnoreCase(PoPOperationState.FAILED.name())) {
             ControlHelper.setStyleClass(currentWorkflowPane, "workflow-failed");
-        }
-        else {
+        } else {
             ControlHelper.setStyleClass(currentWorkflowPane, "workflow-current");
         }
     }

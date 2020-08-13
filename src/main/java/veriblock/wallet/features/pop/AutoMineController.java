@@ -18,7 +18,7 @@ import veriblock.wallet.core.*;
 import veriblock.wallet.core.locale.LocaleManager;
 import veriblock.wallet.core.locale.LocaleModule;
 import veriblock.wallet.core.pop.*;
-import veriblock.wallet.core.pop.entities.ConfigEntity;
+import veriblock.wallet.core.pop.entities.AutoMineConfigEntity;
 import veriblock.wallet.features.LocaleModuleResource;
 import veriblock.wallet.features.SoundItem;
 import veriblock.wallet.uicommon.ControlHelper;
@@ -141,16 +141,15 @@ public class AutoMineController extends DialogController {
         _autoMineModel = new AutoMineModel();
 
         //pull from api
-        ConfigEntity config = _clientProxy.getConfig();
-        updateModelFromConfig(config);
+        AutoMineConfigEntity autoMineConfigEntity = _clientProxy.getAutoMineConfig();
+        updateModelFromConfig(autoMineConfigEntity);
     }
 
-    private void updateModelFromConfig(ConfigEntity config)
-    {
-        _autoMineModel.shouldMineRound1 = config.autoMineRound1;
-        _autoMineModel.shouldMineRound2 = config.autoMineRound2;
-        _autoMineModel.shouldMineRound3 = config.autoMineRound3;
-        _autoMineModel.shouldMineRound4 = config.autoMineRound4;
+    private void updateModelFromConfig(AutoMineConfigEntity autoMineConfigEntity) {
+        _autoMineModel.shouldMineRound1 = autoMineConfigEntity.round1;
+        _autoMineModel.shouldMineRound2 = autoMineConfigEntity.round2;
+        _autoMineModel.shouldMineRound3 = autoMineConfigEntity.round3;
+        _autoMineModel.shouldMineRound4 = autoMineConfigEntity.round4;
     }
 
     public Label lblMessage1;
@@ -228,26 +227,23 @@ public class AutoMineController extends DialogController {
         }
     }
 
-    private boolean saveRounds()
-    {
+    private boolean saveRounds() {
         boolean blnSuccess = true;
         try {
-            _clientProxy.setConfig(ConfigConstants.Key.AUTO_MINE_ROUND1, Boolean.toString(_autoMineModel.shouldMineRound1));
-            _clientProxy.setConfig(ConfigConstants.Key.AUTO_MINE_ROUND2, Boolean.toString(_autoMineModel.shouldMineRound2));
-            _clientProxy.setConfig(ConfigConstants.Key.AUTO_MINE_ROUND3, Boolean.toString(_autoMineModel.shouldMineRound3));
-            _clientProxy.setConfig(ConfigConstants.Key.AUTO_MINE_ROUND4, Boolean.toString(_autoMineModel.shouldMineRound4));
-        }
-        catch (Exception ex)
-        {
+            AutoMineConfigEntity autoMineConfigEntity = new AutoMineConfigEntity();
+            autoMineConfigEntity.round1 = _autoMineModel.shouldMineRound1;
+            autoMineConfigEntity.round2 = _autoMineModel.shouldMineRound2;
+            autoMineConfigEntity.round3 = _autoMineModel.shouldMineRound3;
+            autoMineConfigEntity.round4 = _autoMineModel.shouldMineRound4;
+            _clientProxy.setAutoMineConfig(autoMineConfigEntity);
+        } catch (Exception ex) {
             //Should be able to connect and save, but just in case...
-
             _logger.error("Could not save Auto_Mine: {}", ex);
             ValidationInfo vi = new ValidationInfo();
             vi.setMessageError(_localeModule.getString("AutoMine_save_error"));
             ControlHelper.showConfirmDialog(vi);
             blnSuccess = false;
         }
-
         return blnSuccess;
     }
 

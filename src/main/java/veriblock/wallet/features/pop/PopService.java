@@ -19,7 +19,7 @@ public class PopService {
 
     public static ApiProxy getApiProxy()
     {
-        return new ApiProxy("http://localhost:8600");
+        return new ApiProxy("http://localhost:8080");
     }
 
     public static long getMinimumBtcBalance()

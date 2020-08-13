@@ -7,15 +7,10 @@
 
 package veriblock.wallet.core.pop.entities;
 
+import java.util.List;
+
 public class MineResultEntity {
-
-    public MineResultEntity()
-    {
-
-    }
-
     public String operationId;
     public boolean failed;
-    public MessageEntity[] messages;
-
+    public List<MessageEntity> messages;
 }

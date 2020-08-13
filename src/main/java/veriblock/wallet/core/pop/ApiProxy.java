@@ -7,107 +7,82 @@
 
 package veriblock.wallet.core.pop;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import veriblock.wallet.core.pop.entities.*;
+import veriblock.wallet.core.pop.entities.OperationSummaryListEntity;
+import veriblock.wallet.core.pop.entities.OperationSummaryEntity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ApiProxy {
+    private static final Gson gson = new Gson();
 
-    public ApiProxy(String baseUrl)
-    {
+    public ApiProxy(String baseUrl) {
         _baseUrl = baseUrl;
     }
 
     private String _baseUrl;
 
-    private String getUrl(String command)
-    {
+    private String getUrl(String command) {
         return  _baseUrl + "/api/" + command;
     }
 
-    public boolean isConnected()
-    {
-        //http://127.0.0.1:8600/api/config
-
-        //Does not check miner properties as that could get SEED.
-
-        ConfigEntity configTest = this.getConfig();
+    public boolean isConnected() {
         //TODO - better api check?
-        if (configTest != null && configTest.bitcoinFeeMax != 0) {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        final BtcFeeConfigEntity configTest = getBtcFeeConfig();
+        return configTest != null && configTest.maxFee != 0;
     }
 
-    ///api/config
-    //Returns null if not found (such as service not running)
-    public ConfigEntity getConfig()
-    {
-        //HttpResponseMessage response = await client.PutAsync("/api/config", new StringContent(body.ToString(), Encoding.UTF8, "application/json"));
-        //response.EnsureSuccessStatusCode();
-        //
-        String fullUrl = getUrl("config");
-        String strContent = getUrlContent(fullUrl);
-        if (strContent == null || strContent.length() == 0)
-        {
+    public AutoMineConfigEntity getAutoMineConfig() {
+        final String fullUrl = getUrl("config/automine");
+        final String strContent = getUrlContent(fullUrl);
+        if (strContent == null || strContent.length() == 0) {
             return null;
         }
-
-        JsonObject json = getUrlJson(strContent);
-        ConfigEntity entity = PopEntityParser.parseConfigEntity(json);
-
+        final AutoMineConfigEntity entity = gson.fromJson(strContent, AutoMineConfigEntity.class);
         return entity;
     }
 
-    public List<OperationEntity> getOperations() {
-        List<OperationEntity> results = new ArrayList<>();
+    public BtcFeeConfigEntity getBtcFeeConfig() {
+        final String fullUrl = getUrl("config/btc-fee");
+        final String strContent = getUrlContent(fullUrl);
+        if (strContent == null || strContent.length() == 0) {
+            return null;
+        }
+        final BtcFeeConfigEntity entity = gson.fromJson(strContent, BtcFeeConfigEntity.class);
+        return entity;
+    }
 
+    public List<OperationSummaryEntity> getOperations() {
         String fullUrl = getUrl("operations");
         String strContent = getUrlContent(fullUrl);
         if (strContent == null || strContent.length() == 0) {
             return null;
         }
 
-        try {
-            JsonArray jsonArray = getUrlJsonArray(strContent);
-            for (JsonElement item : jsonArray) {
-                JsonObject jo = item.getAsJsonObject();
-                results.add(PopEntityParser.parseOperationEntity(jo));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return results;
+        final OperationSummaryListEntity operationSummaryListEntity = gson.fromJson(strContent, OperationSummaryListEntity.class);
+        return operationSummaryListEntity.operations;
     }
 
-
-    public SetConfigEntity setConfig(ConfigConstants.Key configKey, String value )
-    {
-        String key = ConfigConstants.getKeyString(configKey);
-        String fullUrl = getUrl("config");
-
-        String input = "{\n" +
-                "    \"key\": \"" + key + "\",\n" +
-                "    \"value\": \"" + value + "\"\n" +
-                "}";
+    public void setAutoMineConfig(
+            AutoMineConfigEntity autoMineConfigEntity
+    ) {
+        final String fullUrl = getUrl("config/automine");
+        String input = gson.toJson(autoMineConfigEntity);
         String strContent = doPut(fullUrl, input);
-        JsonObject json = getUrlJson(strContent);
+    }
 
-        SetConfigEntity result = PopEntityParser.parseSetConfigEntity(json);
-        return result;
+    public void setBtcFee(
+            BtcFeeConfigEntity btcFeeConfigEntity
+    ) {
+        final String fullUrl = getUrl("config/btc-fee");
+        String input = gson.toJson(btcFeeConfigEntity);
+        String strContent = doPut(fullUrl, input);
     }
 
     public MineResultEntity mine()
@@ -115,9 +90,8 @@ public class ApiProxy {
         return mine(-1);
     }
 
-    public MineResultEntity mine(int block)
-    {
-        String fullUrl = getUrl("mine");
+    public MineResultEntity mine(int block) {
+        final String fullUrl = getUrl("mine");
 
         String input = "{}";
         if (block > 0)
@@ -126,41 +100,30 @@ public class ApiProxy {
                     "    \"block\": " + Integer.toString(block) + "\n" +
                     "}";
         }
-
-        String strContent = doPost(fullUrl, input);
-        JsonObject json = getUrlJson(strContent);
-
-        MineResultEntity result = PopEntityParser.parseMineResultEntity(json);
-        return result;
+        final String strContent = doPost(fullUrl, input);
+        final MineResultEntity mineResultEntity = gson.fromJson(strContent, MineResultEntity.class);
+        return mineResultEntity;
     }
 
-    public OperationDetailEntity getOperation(String operationId)
-    {
+    public OperationDetailEntity getOperation(String operationId) {
         String fullUrl = getUrl("operations/" + operationId);
         String strContent = getUrlContent(fullUrl);
-        if (strContent == null)
-        {
+        if (strContent == null) {
             return null;
         }
 
-        JsonObject json = getUrlJson(strContent);
-
-        OperationDetailEntity result = PopEntityParser.parseOperationDetailEntity(json);
-        return result;
+        final OperationDetailEntity operationDetailEntity = gson.fromJson(strContent, OperationDetailEntity.class);
+        return operationDetailEntity;
     }
 
-    public MinerPropertiesEntity getMinerPropertiesEntity()
-    {
-        String fullUrl = getUrl("miner");
-        String strContent = getUrlContent(fullUrl);
-        if (strContent == null)
-        {
+    public MinerPropertiesEntity getMinerPropertiesEntity() {
+        final String fullUrl = getUrl("miner");
+        final String strContent = getUrlContent(fullUrl);
+        if (strContent == null) {
             return null;
         }
 
-        JsonObject json = getUrlJson(strContent);
-
-        MinerPropertiesEntity result = PopEntityParser.parseMinerPropertiesEntity(json);
+        final MinerPropertiesEntity result = gson.fromJson(strContent, MinerPropertiesEntity.class);
         return result;
     }
 
