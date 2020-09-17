@@ -80,6 +80,7 @@ dependencies {
 
 startScripts {
 	windowsStartScriptGenerator.template = resources.text.fromFile("windowsStartScript.txt")
+	unixStartScriptGenerator.template = resources.text.fromFile("unixStartScript.txt")
 }
 
 processResources {
