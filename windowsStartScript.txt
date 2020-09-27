@@ -102,7 +102,8 @@ for /f "delims=. tokens=2" %%v in ("%JAVAVER%") do (
 IF %JAVA% LSS %EXPECTED_JAVA_VERSION% goto wrong_version
 goto correct_version
 :wrong_version
-echo Wrong JVM version %JAVAVER%! Minimum required: %EXPECTED_JAVA_VERSION%
+echo Wrong Java version %JAVAVER%! Minimum required: %EXPECTED_JAVA_VERSION%
+pause > nul
 exit /b 1
 :correct_version
 @rem Setup the command line
