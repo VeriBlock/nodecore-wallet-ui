@@ -18,17 +18,18 @@ mainClassName = 'veriblock.wallet.Main'
 repositories {
 	mavenLocal()
 	jcenter()
-
-	//pull dependencies from local /lib folder
-	flatDir {
-		dirs '/lib'
-	}
+	maven { url "http://artifactory.veriblock.com/artifactory/libs-snapshot-local/"}
+	maven { url "http://artifactory.veriblock.com/artifactory/libs-release-local/"}
+	maven { url 'http://artifactory.veriblock.com/artifactory/libs-release/' }
 }
 
 dependencies {
 	testImplementation 'junit:junit:4.12'
 
     runtime "org.codehaus.groovy:groovy:2.4.12"
+
+	compile group: 'veriblock', name: 'veriblock-core', version: '0.4.11-dev.16'
+	compile group: 'veriblock', name: 'nodecore-grpc', version: '0.4.11-dev.16'
 
 	// Logging
 	compile 'ch.qos.logback:logback-classic:1.2.3'
@@ -73,9 +74,6 @@ dependencies {
 	compile 'org.openjfx:javafx-graphics:11.0.2:mac'
 	compile 'org.openjfx:javafx-media:11.0.2:mac'
 	compile 'org.openjfx:javafx-base:11.0.2:mac'
-
-	//Keep it simple, just pull all jar files from /lib folder
-	compile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
 startScripts {
