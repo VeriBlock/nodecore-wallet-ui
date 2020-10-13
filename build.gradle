@@ -79,6 +79,7 @@ dependencies {
 }
 
 startScripts {
+	defaultJvmOpts = ["-Xmx3g"]
 	windowsStartScriptGenerator.template = resources.text.fromFile("windowsStartScript.txt")
 	unixStartScriptGenerator.template = resources.text.fromFile("unixStartScript.txt")
 }
