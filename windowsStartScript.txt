@@ -81,6 +81,31 @@ if "x%~1" == "x" goto execute
 set CMD_LINE_ARGS=%*
 
 :execute
+set EXPECTED_JAVA_VERSION=13
+for /f "tokens=3" %%g in ('java -version 2^>^&1 ^| findstr /i "version"') do (
+    set JAVAVER=%%g
+)
+set JAVAVER=%JAVAVER:"=%
+for /f "delims=. tokens=1" %%v in ("%JAVAVER%") do (
+
+   IF %%v LSS 2 goto old_check
+   set JAVA=%%v
+   goto loaded_version
+)
+:old_check
+for /f "delims=. tokens=2" %%v in ("%JAVAVER%") do (
+
+   set JAVA=%%v
+   goto loaded_version
+)
+:loaded_version
+IF %JAVA% LSS %EXPECTED_JAVA_VERSION% goto wrong_version
+goto correct_version
+:wrong_version
+echo Wrong Java version %JAVAVER%! Minimum required: %EXPECTED_JAVA_VERSION%
+pause > nul
+exit /b 1
+:correct_version
 @rem Setup the command line
 
 set CLASSPATH=%APP_HOME%\\lib\\*
