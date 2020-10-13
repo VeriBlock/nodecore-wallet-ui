@@ -160,7 +160,7 @@ save () {
 APP_ARGS=\$(save "\$@")
 
 EXPECTED_JAVA_VERSION=13
-if [ type -p java ] ; then
+if [ "type -p java" ] ; then
     _java=java
 elif [[ -n "\$JAVA_HOME" ]] && [[ -x "\$JAVA_HOME/bin/java" ]] ; then
     echo "Java was found at JAVA_HOME"
