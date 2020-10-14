@@ -13,7 +13,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="600.0" minWidth="800.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.tools.TabTestController">
+<AnchorPane minHeight="600.0" minWidth="800.0" stylesheets="@/styles/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.tools.TabTestController">
    <children>
       <VBox layoutX="54.0" layoutY="38.0" prefHeight="425.0" prefWidth="708.0">
          <children>

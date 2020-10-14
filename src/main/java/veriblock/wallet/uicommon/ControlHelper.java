@@ -306,7 +306,7 @@ public class ControlHelper {
         dialog.initStyle(StageStyle.UTILITY);
 
         DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.getStylesheets().add(Utils.resourceAsExternal("default.css"));
+        dialogPane.getStylesheets().add(Utils.resourceAsExternal("styles/default.css"));
         dialogPane.getStyleClass().add("dialog");
 
         Optional<Object> result = dialog.showAndWait();
@@ -395,7 +395,7 @@ public class ControlHelper {
 
         alert.initStyle(StageStyle.UTILITY);
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(Utils.resourceAsExternal("default.css"));
+        dialogPane.getStylesheets().add(Utils.resourceAsExternal("styles/default.css"));
         dialogPane.getStyleClass().add("dialog");
 
         return alert;

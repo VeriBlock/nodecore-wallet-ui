@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.tools.TabDiagnosticsController">
+<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@/styles/default.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.tools.TabDiagnosticsController">
    <children>
       <Label fx:id="lblMessage" text="..." AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <TextArea fx:id="txtResults" style="-fx-control-inner-background:#000000; -fx-text-fill: #00ff00; " editable="false" prefHeight="380.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />

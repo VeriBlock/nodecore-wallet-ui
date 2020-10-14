@@ -296,91 +296,91 @@ light grey --> standard font
 
 
 #btnSendX {
-  -fx-graphic: url('./images/tabs/fa-send-green.png');
+  -fx-graphic: url('../images/tabs/fa-send-green.png');
 }
 
 #btnSendX:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-send-blue.png');
+  -fx-graphic: url('../images/tabs/fa-send-blue.png');
 }
 
 #btnSend {
-  -fx-graphic: url('./images/tabs/fa-send-blue.png');
+  -fx-graphic: url('../images/tabs/fa-send-blue.png');
 }
 
 #btnSend:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-send-green.png');
+  -fx-graphic: url('../images/tabs/fa-send-green.png');
 }
 
 #btnTransactions {
-  -fx-graphic: url('./images/tabs/fa-list-blue.png');
+  -fx-graphic: url('../images/tabs/fa-list-blue.png');
 }
 
 #btnTransactions:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-list-green.png');
+  -fx-graphic: url('../images/tabs/fa-list-green.png');
 }
 
 #btnConsole {
-  -fx-graphic: url('./images/tabs/fa-terminal-blue.png');
+  -fx-graphic: url('../images/tabs/fa-terminal-blue.png');
 }
 
 #btnConsole:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-terminal-green.png');
+  -fx-graphic: url('../images/tabs/fa-terminal-green.png');
 }
 
 #btnMyAddresses {
-  -fx-graphic: url('./images/tabs/fa-address-blue.png');
+  -fx-graphic: url('../images/tabs/fa-address-blue.png');
 }
 
 #btnMyAddresses:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-address-green.png');
+  -fx-graphic: url('../images/tabs/fa-address-green.png');
 }
 
 #btnPoP {
-  -fx-graphic: url('./images/tabs/pickaxe-blue.png');
+  -fx-graphic: url('../images/tabs/pickaxe-blue.png');
 }
 
 #btnPoP:selected:focused {
-  -fx-graphic: url('./images/tabs/pickaxe-green.png');
+  -fx-graphic: url('../images/tabs/pickaxe-green.png');
 }
 
 #btnSettings {
-  -fx-graphic: url('./images/tabs/fa-cog-blue.png');
+  -fx-graphic: url('../images/tabs/fa-cog-blue.png');
 }
 
 #btnSettings:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-cog-green.png');
+  -fx-graphic: url('../images/tabs/fa-cog-green.png');
 }
 
 #btnBackup {
-  -fx-graphic: url('./images/tabs/fa-download-blue.png');
+  -fx-graphic: url('../images/tabs/fa-download-blue.png');
 }
 
 #btnBackup:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-download-green.png');
+  -fx-graphic: url('../images/tabs/fa-download-green.png');
 }
 
 #btnHelp {
-  -fx-graphic: url('./images/tabs/fa-question-blue.png');
+  -fx-graphic: url('../images/tabs/fa-question-blue.png');
 }
 
 #btnHelp:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-question-green.png');
+  -fx-graphic: url('../images/tabs/fa-question-green.png');
 }
 
 #btnDiagnostics {
-  -fx-graphic: url('./images/tabs/fa-cog-blue.png');
+  -fx-graphic: url('../images/tabs/fa-cog-blue.png');
 }
 
 #btnDiagnostics:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-cog-green.png');
+  -fx-graphic: url('../images/tabs/fa-cog-green.png');
 }
 
 #btnAbout {
-  -fx-graphic: url('./images/tabs/fa-info-blue.png');
+  -fx-graphic: url('../images/tabs/fa-info-blue.png');
 }
 
 #btnAbout:selected:focused {
-  -fx-graphic: url('./images/tabs/fa-info-green.png');
+  -fx-graphic: url('../images/tabs/fa-info-green.png');
 }
 
 /*

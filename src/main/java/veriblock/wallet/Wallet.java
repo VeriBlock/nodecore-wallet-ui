@@ -59,7 +59,7 @@ public class Wallet extends Application {
             //Add stylesheets
             //This will find in sub-folder, nodecore-wallet-ui\bin\testFiles
             root.getStylesheets().clear();
-            root.getStylesheets().add(Utils.resourceAsExternal("default.css"));
+            root.getStylesheets().add(Utils.resourceAsExternal("styles/default.css"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

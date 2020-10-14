@@ -11,7 +11,7 @@
 
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
-<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@../../../../resources/default.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.wallet.TabBackupController">
+<AnchorPane minHeight="450.0" minWidth="700.0" stylesheets="@/styles/default.css" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="veriblock.wallet.features.wallet.TabBackupController">
    <children>
       <Accordion fx:id="accordionMain" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <panes>
