@@ -1,5 +1,5 @@
 #### Requisites
-* A local NodeCore v0.4.9 instance (or access to a remote one)
+* A local NodeCore v0.4.10+ instance (or access to a remote one)
 * OpenJDK 13 (You can download it here: https://openjdk.java.net/projects/jdk/)
 
 #### Useful links
