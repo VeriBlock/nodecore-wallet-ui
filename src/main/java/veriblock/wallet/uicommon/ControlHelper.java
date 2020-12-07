@@ -300,14 +300,22 @@ public class ControlHelper {
         {
             ex.printStackTrace();
         }
+
         //Set style
         //UNDECORATED --> won't be able to move window, won't have border (including no Red X)
         //DECORATED --> still has border and red X
-        dialog.initStyle(StageStyle.UTILITY);
+        dialog.initStyle(StageStyle.UNDECORATED);
 
         DialogPane dialogPane = dialog.getDialogPane();
         dialogPane.getStylesheets().add(Utils.resourceAsExternal("styles/default.css"));
         dialogPane.getStyleClass().add("dialog");
+
+        dialogPane.setOnMousePressed(pressEvent -> {
+            dialogPane.setOnMouseDragged(dragEvent -> {
+                dialog.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                dialog.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
 
         Optional<Object> result = dialog.showAndWait();
         if (result == null || result == Optional.empty())
