@@ -9,7 +9,7 @@ package veriblock.wallet.features.tools;
 
 import com.google.gson.GsonBuilder;
 import org.veriblock.core.utilities.DiagnosticInfo;
-import org.veriblock.core.utilities.DiagnosticUtility;
+import org.veriblock.core.utilities.DiagnosticUtilityKt;
 import veriblock.wallet.core.*;
 import veriblock.wallet.core.locale.LocaleManager;
 import veriblock.wallet.core.locale.LocaleModule;
@@ -58,7 +58,7 @@ public class TabDiagnosticsController  extends BaseController  {
             nodeCoreDiag =  NodeCoreGateway.getInstance().getDiagnosticInfoRaw();
         }
 
-        DiagnosticInfo di = DiagnosticUtility.getDiagnosticInfo();
+        DiagnosticInfo di = DiagnosticUtilityKt.getDiagnosticInfo();
         String walletAppDiag = (new GsonBuilder().setPrettyPrinting().create().toJson(di));
 
         OtherData otherData = getOtherData();

@@ -7,11 +7,11 @@
 
 package veriblock.wallet.entities;
 
-import nodecore.api.grpc.VeriBlockMessages;
+import nodecore.api.grpc.RpcPopEndorsementInfo;
 import org.veriblock.core.utilities.Utility;
 
 public class PoPEndorsementInfoEntity {
-    public PoPEndorsementInfoEntity(final VeriBlockMessages.PoPEndorsementInfo popEndorsementInfo) {
+    public PoPEndorsementInfoEntity(final RpcPopEndorsementInfo popEndorsementInfo) {
 
         minerAddress = Utility.bytesToBase58(popEndorsementInfo.getMinerAddress().toByteArray());
         endorsedVeriBlockBlockHash = Utility.bytesToHex(popEndorsementInfo.getEndorsedVeriblockBlockHash().toByteArray());
