@@ -15,7 +15,6 @@
 *.class
 
 # Gradle generated files
-dist/
 gen/
 
 # Local configuration file used for proj. specific settings (sdk paths, etc)
