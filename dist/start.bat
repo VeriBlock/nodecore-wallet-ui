@@ -16,7 +16,7 @@ java -version >nul 2>&1 && (
 	echo It is recommended to use Java 14 to run GUI Wallet.
 	echo The direct install link is here:
 	
-	if %OS%==32BIT echo https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%%2B12/OpenJDK14U-jdk_x86-32_windows_hotspot_14.0.2_12.msi
+	if %OS%==32BIT echo https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%%2B12/OpenJDK14U-jre_x86-32_windows_hotspot_14.0.2_12.msi
 	if %OS%==64BIT echo https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%%2B12/OpenJDK14U-jre_x64_windows_hotspot_14.0.2_12.msi
 	
 	echo Please first install Java and then re-run `start.bat` 
