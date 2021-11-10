@@ -40,7 +40,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.veriblock.core.utilities.DiagnosticInfo;
-import org.veriblock.core.utilities.DiagnosticUtility;
+import org.veriblock.core.utilities.DiagnosticUtilityKt;
 
 public class MainController {
 
@@ -130,7 +130,7 @@ public class MainController {
     private LocaleModule _localeModule;
     private void logDiagnosticInfo()
     {
-        DiagnosticInfo di = DiagnosticUtility.getDiagnosticInfo();
+        DiagnosticInfo di = DiagnosticUtilityKt.getDiagnosticInfo();
         String strDiagnostics = (new GsonBuilder().setPrettyPrinting().create().toJson(di));
         _logger.info(strDiagnostics);
     }

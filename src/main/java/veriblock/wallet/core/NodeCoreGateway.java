@@ -12,9 +12,9 @@ import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.StatusRuntimeException;
 import javafx.util.Pair;
-import nodecore.api.grpc.AdminGrpc;
-import nodecore.api.grpc.AdminRpcConfiguration;
-import nodecore.api.grpc.VeriBlockMessages;
+
+import nodecore.api.grpc.*;
+
 import nodecore.api.grpc.utilities.ByteStringUtility;
 import nodecore.api.grpc.utilities.ChannelBuilder;
 import org.slf4j.Logger;
@@ -88,10 +88,10 @@ public class NodeCoreGateway {
     }
 
     //Merely having a non-null blockingStub does not mean it is actually connected, or that NC is in sync
-    private Pair<ConnectionResult, VeriBlockMessages.GetStateInfoReply> ensureBlockingStub() {
+    private Pair<ConnectionResult, RpcGetStateInfoReply> ensureBlockingStub() {
 
         ConnectionResult result = new ConnectionResult(_connectionInput);
-        Pair<ConnectionResult, VeriBlockMessages.GetStateInfoReply> outputs = new
+        Pair<ConnectionResult, RpcGetStateInfoReply> outputs = new
                 Pair<>(result, null);
 
         //are inputs specified? Cannot proceed further
@@ -127,8 +127,8 @@ public class NodeCoreGateway {
         //Have a blocking stub (could have been created before) --> can we do lightweight ping?
         try {
             //Password needed here
-            VeriBlockMessages.GetStateInfoReply testGetStateInfo = getBlockingStub().getStateInfo(
-                    VeriBlockMessages.GetStateInfoRequest.newBuilder().build());
+            RpcGetStateInfoReply testGetStateInfo = getBlockingStub().getStateInfo(
+                    RpcGetStateInfoRequest.newBuilder().build());
 
             outputs = new Pair<>(result, testGetStateInfo);
             //We could at least connect!
@@ -173,7 +173,7 @@ public class NodeCoreGateway {
         return config;
     }
 
-    private boolean isInSync(VeriBlockMessages.GetStateInfoReply result) {
+    private boolean isInSync(RpcGetStateInfoReply result) {
         Integer threshold = 3; //local must be no less than X from network to be seen as insync
 
         //TODO _ alphanet hack --> want alphanet to be synced for easier testing, and network height may be
@@ -202,8 +202,8 @@ public class NodeCoreGateway {
 
 
     private class OutputContainer<T> {
-        public OutputContainer(T entity, boolean replySuccess, List<VeriBlockMessages.Result> replyList) {
-            //TODO - could not convert to generic VeriBlockMessages.ProtocolReply reply2, so pass in parts
+        public OutputContainer(T entity, boolean replySuccess, List<RpcResult> replyList) {
+            //TODO - could not convert to generic RpcProtocolReply reply2, so pass in parts
             Entity = entity;
             Success = replySuccess;
             ReplyList = replyList;
@@ -211,7 +211,7 @@ public class NodeCoreGateway {
 
         public T Entity;
         private boolean Success;
-        List<VeriBlockMessages.Result> ReplyList;
+        List<RpcResult> ReplyList;
     }
 
     private interface DoGrpcWork<T> {
@@ -281,8 +281,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> unlockwallet(String passphrase) {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.ProtocolReply reply = _blockingStub
-                    .unlockWallet(VeriBlockMessages.UnlockWalletRequest.newBuilder()
+            RpcProtocolReply reply = _blockingStub
+                    .unlockWallet(RpcUnlockWalletRequest.newBuilder()
                             .setPassphrase(passphrase)
                             .build());
 
@@ -309,8 +309,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> lockwallet() {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.ProtocolReply reply = _blockingStub
-                    .lockWallet(VeriBlockMessages.LockWalletRequest.newBuilder().build());
+            RpcProtocolReply reply = _blockingStub
+                    .lockWallet(RpcLockWalletRequest.newBuilder().build());
 
             _logger.info("GRPC lockwallet");
 
@@ -339,8 +339,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> encryptWallet(String passphrase) {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.ProtocolReply reply = _blockingStub
-                    .encryptWallet(VeriBlockMessages.EncryptWalletRequest.newBuilder()
+            RpcProtocolReply reply = _blockingStub
+                    .encryptWallet(RpcEncryptWalletRequest.newBuilder()
                             .setPassphrase(passphrase)
                             .build());
 
@@ -356,8 +356,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> decryptWallet(String passphrase) {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.ProtocolReply reply = _blockingStub
-                    .decryptWallet(VeriBlockMessages.DecryptWalletRequest.newBuilder()
+            RpcProtocolReply reply = _blockingStub
+                    .decryptWallet(RpcDecryptWalletRequest.newBuilder()
                             .setPassphrase(passphrase)
                             .build());
 
@@ -376,7 +376,7 @@ public class NodeCoreGateway {
         CommandResult<T> commandResult = new CommandResult<>();
 
         //get connection setting here
-        Pair<ConnectionResult, VeriBlockMessages.GetStateInfoReply> outputs = ensureBlockingStub();
+        Pair<ConnectionResult, RpcGetStateInfoReply> outputs = ensureBlockingStub();
         ConnectionResult connectionResult = outputs.getKey();
         commandResult.setConnectionResult(connectionResult);
         if (!connectionResult.isConnectedAndSynced()) {
@@ -394,7 +394,7 @@ public class NodeCoreGateway {
             OutputContainer<T> outputContainer = grpcWork.doWork();    //doCustom(sendInput); --> invoke todoInjectMethod
             T entity = outputContainer.Entity;
             boolean replySuccess = outputContainer.Success;
-            List<VeriBlockMessages.Result> replyList = outputContainer.ReplyList;
+            List<RpcResult> replyList = outputContainer.ReplyList;
             //END CUSTOM - END
 
             ValidationInfo ri = new ValidationInfo();
@@ -406,7 +406,7 @@ public class NodeCoreGateway {
                 //error, populate ValidationInfo
                 ri.setStatus(ValidationInfo.Status.Error);
                 StringBuilder sb = new StringBuilder();
-                for (VeriBlockMessages.Result errorResult : replyList) {
+                for (RpcResult errorResult : replyList) {
                     sb.append(errorResult.getDetails() + " ");
                 }
                 ri.setMessageInfo(sb.toString().trim());
@@ -476,12 +476,12 @@ public class NodeCoreGateway {
         CommandResult<StateInfoEntity> commandResult = new CommandResult<>();
 
         //get connection setting here
-        Pair<ConnectionResult, VeriBlockMessages.GetStateInfoReply> outputs = ensureBlockingStub();
+        Pair<ConnectionResult, RpcGetStateInfoReply> outputs = ensureBlockingStub();
         ConnectionResult connectionResult = outputs.getKey();
         commandResult.setConnectionResult(connectionResult);
 
         //want getStateInfo from the blockingStub test
-        VeriBlockMessages.GetStateInfoReply gsi = outputs.getValue();
+        RpcGetStateInfoReply gsi = outputs.getValue();
 
 
         try {
@@ -542,8 +542,8 @@ public class NodeCoreGateway {
             InfoEntity entity = new InfoEntity();
 
             //also getinfo to find default address
-            VeriBlockMessages.GetInfoReply reply = this.getBlockingStub().getInfo(
-                    VeriBlockMessages.GetInfoRequest.newBuilder().build());
+            RpcGetInfoReply reply = this.getBlockingStub().getInfo(
+                    RpcGetInfoRequest.newBuilder().build());
 
             if (reply.hasDefaultAddress()) {
                 entity.setDefaultAddress(formatAddress(reply.getDefaultAddress().getAddress()));
@@ -578,9 +578,9 @@ public class NodeCoreGateway {
 
             String fromAddress = sendInput.fromAddress;
 
-            //VeriBlockMessages.GetWalletTransactionsRequest.Builder requestBuilder = VeriBlockMessages.GetWalletTransactionsRequest.newBuilder();
-            VeriBlockMessages.SendCoinsRequest.Builder builder = VeriBlockMessages.SendCoinsRequest.newBuilder();
-            builder.addAmounts(VeriBlockMessages.Output
+            //RpcGetWalletTransactionsRequest.Builder requestBuilder = RpcGetWalletTransactionsRequest.newBuilder();
+            RpcSendCoinsRequest.Builder builder = RpcSendCoinsRequest.newBuilder();
+            builder.addAmounts(RpcOutput
                     .newBuilder()
                     .setAddress(convertAddressToByteString(sendInput.targetAddress))
                     .setAmount(sendInput.sentAmount)
@@ -591,7 +591,7 @@ public class NodeCoreGateway {
                 builder.setSourceAddress(convertAddressToByteString(fromAddress));
             }
 
-            VeriBlockMessages.SendCoinsReply reply = _blockingStub.sendCoins(builder.build());
+            RpcSendCoinsReply reply = _blockingStub.sendCoins(builder.build());
 
             //get TX result
             for (ByteString bsTX : reply.getTxIdsList()) {
@@ -613,8 +613,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> setTxFeePerByte(long feePerByte) {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.ProtocolReply reply = this.getBlockingStub().setTransactionFee(
-                    VeriBlockMessages.SetTransactionFeeRequest.newBuilder()
+            RpcProtocolReply reply = this.getBlockingStub().setTransactionFee(
+                    RpcSetTransactionFeeRequest.newBuilder()
                             .setAmount(feePerByte)
                             .build());
 
@@ -629,8 +629,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> backupWallet(String targetFolder) {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.BackupWalletReply reply = this.getBlockingStub().backupWallet(
-                    VeriBlockMessages.BackupWalletRequest.newBuilder()
+            RpcBackupWalletReply reply = this.getBlockingStub().backupWallet(
+                    RpcBackupWalletRequest.newBuilder()
                             .setTargetLocation(ByteString.copyFrom(targetFolder.getBytes()))
                             .build());
             return new OutputContainer<>(null, reply.getSuccess(), reply.getResultsList());
@@ -650,8 +650,8 @@ public class NodeCoreGateway {
             if (cachePassword != null)
                 password = cachePassword;
 
-            VeriBlockMessages.ImportWalletReply reply = this.getBlockingStub().importWallet(
-                    VeriBlockMessages.ImportWalletRequest.newBuilder()
+            RpcImportWalletReply reply = this.getBlockingStub().importWallet(
+                    RpcImportWalletRequest.newBuilder()
                             .setPassphrase(password)
                             .setSourceLocation(ByteString.copyFrom(backupFile.getBytes()))
                             .build());
@@ -668,15 +668,15 @@ public class NodeCoreGateway {
         {
             PendingTransactionEntity entity = new PendingTransactionEntity();
 
-            VeriBlockMessages.DrainAddressReply reply = this.getBlockingStub().drainAddress(
-                    VeriBlockMessages.DrainAddressRequest.newBuilder()
+            RpcDrainAddressReply reply = this.getBlockingStub().drainAddress(
+                    RpcDrainAddressRequest.newBuilder()
                             .setSourceAddress(ByteStringUtility.base58ToByteString(sourceAddress))
                             .setDestinationAddress(ByteStringUtility.base58ToByteString(targetAddress))
                             .build());
 
             _logger.info("GRPC drainAddress: source:{}, target:{}", sourceAddress, targetAddress);
 
-            VeriBlockMessages.Transaction transaction = reply.getTransaction();
+            RpcTransaction transaction = reply.getTransaction();
 
             entity.txId = Utility.bytesToHex(transaction.getTxId().toByteArray());
             entity.sizeBytes = transaction.getSize();
@@ -692,8 +692,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> setDefaultAddress(String newAddress) {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.SetDefaultAddressReply reply = this.getBlockingStub().setDefaultAddress(
-                    VeriBlockMessages.SetDefaultAddressRequest.newBuilder()
+            RpcSetDefaultAddressReply reply = this.getBlockingStub().setDefaultAddress(
+                    RpcSetDefaultAddressRequest.newBuilder()
                             .setAddress(ByteStringUtility.base58ToByteString(newAddress))
                             .build());
 
@@ -709,16 +709,16 @@ public class NodeCoreGateway {
         {
             List<AddressBalanceEntity> entity = new ArrayList<>();
 
-            VeriBlockMessages.GetBalanceReply reply = this.getBlockingStub().getBalance(
-                    VeriBlockMessages.GetBalanceRequest.newBuilder().build());
+            RpcGetBalanceReply reply = this.getBlockingStub().getBalance(
+                    RpcGetBalanceRequest.newBuilder().build());
 
             //Populate first so we can look it up:
             HashMap<String, Long> unconfirmed = new HashMap<>();
-            for (VeriBlockMessages.Output o : reply.getUnconfirmedList()) {
+            for (RpcOutput o : reply.getUnconfirmedList()) {
                 unconfirmed.put(formatAddress(o.getAddress()), o.getAmount());
             }
 
-            for (VeriBlockMessages.AddressBalance o : reply.getConfirmedList()) {
+            for (RpcAddressBalance o : reply.getConfirmedList()) {
                 AddressBalanceEntity address = new AddressBalanceEntity();
                 address.setAddress(formatAddress(o.getAddress()));
                 address.setAmountConfirmedAtomic(o.getUnlockedAmount()); //only show unlocked, not locked
@@ -740,11 +740,11 @@ public class NodeCoreGateway {
         {
             List<PendingTransactionEntity> entities = new ArrayList<>();
 
-            VeriBlockMessages.GetPendingTransactionsReply reply = this.getBlockingStub().getPendingTransactions(
-                        VeriBlockMessages.GetPendingTransactionsRequest.newBuilder()
+            RpcGetPendingTransactionsReply reply = this.getBlockingStub().getPendingTransactions(
+                        RpcGetPendingTransactionsRequest.newBuilder()
                                 .build());
             //have list, apply filter
-            for (VeriBlockMessages.Transaction transaction : reply.getTransactionsList()) {
+            for (RpcTransaction transaction : reply.getTransactionsList()) {
                 String resultTxId = Utility.bytesToHex(transaction.getTxId().toByteArray());
 
                 if (resultTxId != null && lookupTxIds.contains(resultTxId)) {
@@ -776,8 +776,8 @@ public class NodeCoreGateway {
         {
             NewAddressEntity entity = new NewAddressEntity();
 
-            VeriBlockMessages.GetNewAddressReply reply = this.getBlockingStub().getNewAddress(
-                    VeriBlockMessages.GetNewAddressRequest.newBuilder().build());
+            RpcGetNewAddressReply reply = this.getBlockingStub().getNewAddress(
+                    RpcGetNewAddressRequest.newBuilder().build());
 
             entity.setNewAddress(Utility.bytesToBase58(reply.getAddress().toByteArray()));
 
@@ -795,8 +795,8 @@ public class NodeCoreGateway {
         {
             String entity = new String();
 
-            VeriBlockMessages.DumpPrivateKeyReply reply = this.getBlockingStub().dumpPrivateKey(
-                    VeriBlockMessages.DumpPrivateKeyRequest.newBuilder()
+            RpcDumpPrivateKeyReply reply = this.getBlockingStub().dumpPrivateKey(
+                    RpcDumpPrivateKeyRequest.newBuilder()
                             .setAddress(ByteStringUtility.base58ToByteString(strAddress))
                             .build());
 
@@ -815,8 +815,8 @@ public class NodeCoreGateway {
         {
             String entity = new String();
 
-            VeriBlockMessages.ImportPrivateKeyReply reply = this.getBlockingStub().importPrivateKey(
-                    VeriBlockMessages.ImportPrivateKeyRequest.newBuilder()
+            RpcImportPrivateKeyReply reply = this.getBlockingStub().importPrivateKey(
+                    RpcImportPrivateKeyRequest.newBuilder()
                             .setPrivateKey(ByteStringUtility.hexToByteString(privateKeyHexString))
                             .build());
 
@@ -832,8 +832,8 @@ public class NodeCoreGateway {
     public CommandResult<Void> refreshWalletCache() {
         DoGrpcWork<Void> work = () ->
         {
-            VeriBlockMessages.ProtocolReply reply = this.getBlockingStub().refreshWalletCache(
-                    VeriBlockMessages.RefreshWalletCacheRequest.newBuilder().build());
+            RpcProtocolReply reply = this.getBlockingStub().refreshWalletCache(
+                    RpcRefreshWalletCacheRequest.newBuilder().build());
 
             _logger.info("GRPC refreshWalletCache");
 
@@ -846,8 +846,8 @@ public class NodeCoreGateway {
     //NOTE --> break convention and have this just return JSON as a one-off function?
     public String getDiagnosticInfoRaw() {
 
-        VeriBlockMessages.GetDiagnosticInfoReply reply = this.getBlockingStub().getDiagnosticInfo(
-                VeriBlockMessages.GetDiagnosticInfoRequest.newBuilder().build());
+        RpcGetDiagnosticInfoReply reply = this.getBlockingStub().getDiagnosticInfo(
+                RpcGetDiagnosticInfoRequest.newBuilder().build());
 
         if (reply.getSuccess()) {
             return (new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(reply));
@@ -862,21 +862,21 @@ public class NodeCoreGateway {
         int pageNumber, int resultsPerPage, boolean isPending) {
         DoGrpcWork<WalletTransactionsEntity> work = () ->
         {
-            VeriBlockMessages.GetWalletTransactionsRequest.Builder requestBuilder = VeriBlockMessages.GetWalletTransactionsRequest.newBuilder();
+            RpcGetWalletTransactionsRequest.Builder requestBuilder = RpcGetWalletTransactionsRequest.newBuilder();
             WalletTransactionsEntity entity = new WalletTransactionsEntity();
             List<WalletTransactionEntity> items = new ArrayList<>();
 
-            requestBuilder.setRequestType(VeriBlockMessages.GetWalletTransactionsRequest.Type.QUERY);
+            requestBuilder.setRequestType(RpcGetWalletTransactionsRequest.Type.QUERY);
 
             //Set input params:
             if (myAddress == null)
             {
                 //returns all, ignoring any filter
                 if (isPending) {
-                    requestBuilder.setRequestType(VeriBlockMessages.GetWalletTransactionsRequest.Type.QUERY);
+                    requestBuilder.setRequestType(RpcGetWalletTransactionsRequest.Type.QUERY);
                 } else {
                     //LIST --> returns all, ignoring any filter
-                    requestBuilder.setRequestType(VeriBlockMessages.GetWalletTransactionsRequest.Type.LIST);
+                    requestBuilder.setRequestType(RpcGetWalletTransactionsRequest.Type.LIST);
                 }
             }
             else
@@ -885,26 +885,26 @@ public class NodeCoreGateway {
             }
 
             //Single query will not return both
-            VeriBlockMessages.TransactionMeta.Status filterStatus = VeriBlockMessages.TransactionMeta.Status.UNKNOWN;
+            RpcTransactionMeta.Status filterStatus = RpcTransactionMeta.Status.UNKNOWN;
             if (isPending)
             {
                 //Pending
-                filterStatus = VeriBlockMessages.TransactionMeta.Status.PENDING;
+                filterStatus = RpcTransactionMeta.Status.PENDING;
             }
             else
             {
                 //Confirmed
-                filterStatus = VeriBlockMessages.TransactionMeta.Status.CONFIRMED;
+                filterStatus = RpcTransactionMeta.Status.CONFIRMED;
             }
 
 
-            requestBuilder.setTransactionType(VeriBlockMessages.WalletTransaction.Type.NOT_SET);
+            requestBuilder.setTransactionType(RpcWalletTransaction.Type.NOT_SET);
             requestBuilder.setStatus(filterStatus);
-            requestBuilder.setPage(VeriBlockMessages.Paging.newBuilder()
+            requestBuilder.setPage(RpcPaging.newBuilder()
                     .setPageNumber(pageNumber)
                     .setResultsPerPage(resultsPerPage).build());
 
-            VeriBlockMessages.GetWalletTransactionsReply reply = getBlockingStub()
+            RpcGetWalletTransactionsReply reply = getBlockingStub()
                     .getWalletTransactions(requestBuilder.build());
 
             String cacheState = reply.getCacheState().name();
@@ -934,7 +934,7 @@ public class NodeCoreGateway {
             int iCount = reply.getTransactionsCount();
             _logger.info("Found {} wallet transactions for address={}, isPending={}", iCount, myAddress, isPending);
             for (int i = 0; i < iCount; i++) {
-                VeriBlockMessages.WalletTransaction t = reply.getTransactions(i);
+                RpcWalletTransaction t = reply.getTransactions(i);
                 WalletTransactionEntity row = new WalletTransactionEntity();
 
                 try {
@@ -988,7 +988,7 @@ public class NodeCoreGateway {
                 }
                 catch (Exception ex2)
                 {
-                    _logger.error("Error parsing VeriBlockMessages.WalletTransaction. Index={}, Transaction={}, Exception={}",
+                    _logger.error("Error parsing RpcWalletTransaction. Index={}, Transaction={}, Exception={}",
                             i, t.toString(), Utils.getExcetionToString(ex2));
 
                     if (formatAddress(t.getInput().getAddress()).length() > 40)
@@ -1018,7 +1018,7 @@ public class NodeCoreGateway {
                     items.add(row);
                 }
             }
-            //NOTE --> cannot get VeriBlockMessages.ProcoloReply from reply, so pass in defaults
+            //NOTE --> cannot get RpcProcoloReply from reply, so pass in defaults
             entity.setWalletTransactions(items);
             return new OutputContainer<>(entity, true, null);
         };
@@ -1029,11 +1029,11 @@ public class NodeCoreGateway {
     public CommandResult<List<PoPEndorsementInfoEntity>> getPoPEndorsementInfo(int searchLength) {
         DoGrpcWork<List<PoPEndorsementInfoEntity>> work = () ->
         {
-            VeriBlockMessages.GetPoPEndorsementsInfoRequest request
-                    = VeriBlockMessages.GetPoPEndorsementsInfoRequest.newBuilder()
+            RpcGetPopEndorsementsInfoRequest request
+                    = RpcGetPopEndorsementsInfoRequest.newBuilder()
                     .setSearchLength(searchLength)
                     .build();
-            VeriBlockMessages.GetPoPEndorsementsInfoReply reply = this.getBlockingStub().getPoPEndorsementsInfo(request);
+            RpcGetPopEndorsementsInfoReply reply = this.getBlockingStub().getPopEndorsementsInfo(request);
 
             List<PoPEndorsementInfoEntity> entity = reply.getPopEndorsementsList()
                     .stream()

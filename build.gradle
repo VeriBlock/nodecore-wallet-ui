@@ -28,8 +28,8 @@ dependencies {
 
     runtime "org.codehaus.groovy:groovy:2.4.12"
 
-	compile group: 'veriblock', name: 'veriblock-core', version: '0.4.11-dev.16'
-	compile group: 'veriblock', name: 'nodecore-grpc', version: '0.4.11-dev.16'
+	compile group: 'veriblock', name: 'veriblock-core', version: '0.4.13-rc.6.dev.5'
+	compile group: 'veriblock', name: 'nodecore-grpc', version: '0.4.13-rc.6.dev.5'
 
 	// Logging
 	compile 'ch.qos.logback:logback-classic:1.2.3'
@@ -122,7 +122,8 @@ distributions {
 		contents {
 			from("${rootProject.projectDir}/dist") {
 				include("README.md")
-				into("bin")
+				include("start.bat")
+				into(".")
 			}
 		}
 	}
