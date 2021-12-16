@@ -28,8 +28,8 @@ dependencies {
 
     runtime "org.codehaus.groovy:groovy:2.4.12"
 
-	compile group: 'veriblock', name: 'veriblock-core', version: '0.4.13-rc.6.dev.5'
-	compile group: 'veriblock', name: 'nodecore-grpc', version: '0.4.13-rc.6.dev.5'
+	compile group: 'veriblock', name: 'veriblock-core', version: '0.4.13-rc.11'
+	compile group: 'veriblock', name: 'nodecore-grpc', version: '0.4.13-rc.11'
 
 	// Logging
 	compile 'ch.qos.logback:logback-classic:1.2.3'
@@ -74,6 +74,12 @@ dependencies {
 	compile 'org.openjfx:javafx-graphics:11.0.2:mac'
 	compile 'org.openjfx:javafx-media:11.0.2:mac'
 	compile 'org.openjfx:javafx-base:11.0.2:mac'
+
+	constraints {
+		implementation("org.apache.logging.log4j:2.15.0") {
+			because("Force update log4j to fix vulnerability CVE-2021-44228")
+		}
+	}
 }
 
 startScripts {
